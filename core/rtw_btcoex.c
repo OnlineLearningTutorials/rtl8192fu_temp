@@ -49,6 +49,7 @@ void rtw_btcoex_HAL_Initialize(PADAPTER padapter, u8 bWifiOnly)
 
 void rtw_btcoex_IpsNotify(PADAPTER padapter, u8 type)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 
 	pHalData = GET_HAL_DATA(padapter);
@@ -60,6 +61,7 @@ void rtw_btcoex_IpsNotify(PADAPTER padapter, u8 type)
 
 void rtw_btcoex_LpsNotify(PADAPTER padapter, u8 type)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 
 	pHalData = GET_HAL_DATA(padapter);
@@ -71,6 +73,7 @@ void rtw_btcoex_LpsNotify(PADAPTER padapter, u8 type)
 
 void rtw_btcoex_ScanNotify(PADAPTER padapter, u8 type)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 #ifdef CONFIG_BT_COEXIST_SOCKET_TRX
 	struct bt_coex_info *pcoex_info = &padapter->coex_info;
@@ -102,6 +105,7 @@ void rtw_btcoex_ScanNotify(PADAPTER padapter, u8 type)
 
 void rtw_btcoex_ConnectNotify(PADAPTER padapter, u8 action)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 
 	pHalData = GET_HAL_DATA(padapter);
@@ -128,6 +132,7 @@ void rtw_btcoex_ConnectNotify(PADAPTER padapter, u8 action)
 
 void rtw_btcoex_MediaStatusNotify(PADAPTER padapter, u8 mediaStatus)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 
 	pHalData = GET_HAL_DATA(padapter);
@@ -158,6 +163,7 @@ void rtw_btcoex_MediaStatusNotify(PADAPTER padapter, u8 mediaStatus)
 
 void rtw_btcoex_SpecialPacketNotify(PADAPTER padapter, u8 pktType)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 
 	pHalData = GET_HAL_DATA(padapter);
@@ -169,6 +175,7 @@ void rtw_btcoex_SpecialPacketNotify(PADAPTER padapter, u8 pktType)
 
 void rtw_btcoex_IQKNotify(PADAPTER padapter, u8 state)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 
 	pHalData = GET_HAL_DATA(padapter);
@@ -180,6 +187,7 @@ void rtw_btcoex_IQKNotify(PADAPTER padapter, u8 state)
 
 void rtw_btcoex_BtInfoNotify(PADAPTER padapter, u8 length, u8 *tmpBuf)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 
 	pHalData = GET_HAL_DATA(padapter);
@@ -191,6 +199,7 @@ void rtw_btcoex_BtInfoNotify(PADAPTER padapter, u8 length, u8 *tmpBuf)
 
 void rtw_btcoex_BtMpRptNotify(PADAPTER padapter, u8 length, u8 *tmpBuf)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 
 	pHalData = GET_HAL_DATA(padapter);
@@ -205,6 +214,7 @@ void rtw_btcoex_BtMpRptNotify(PADAPTER padapter, u8 length, u8 *tmpBuf)
 
 void rtw_btcoex_SuspendNotify(PADAPTER padapter, u8 state)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 
 	pHalData = GET_HAL_DATA(padapter);
@@ -216,6 +226,7 @@ void rtw_btcoex_SuspendNotify(PADAPTER padapter, u8 state)
 
 void rtw_btcoex_HaltNotify(PADAPTER padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 	u8 do_halt = 1;
 
@@ -270,6 +281,7 @@ u8 rtw_btcoex_IsBtDisabled(PADAPTER padapter)
 
 void rtw_btcoex_Handler(PADAPTER padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	PHAL_DATA_TYPE	pHalData;
 
 	pHalData = GET_HAL_DATA(padapter);
@@ -282,6 +294,7 @@ void rtw_btcoex_Handler(PADAPTER padapter)
 
 s32 rtw_btcoex_IsBTCoexRejectAMPDU(PADAPTER padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	s32 coexctrl;
 
 	coexctrl = hal_btcoex_IsBTCoexRejectAMPDU(padapter);
@@ -291,6 +304,7 @@ s32 rtw_btcoex_IsBTCoexRejectAMPDU(PADAPTER padapter)
 
 s32 rtw_btcoex_IsBTCoexCtrlAMPDUSize(PADAPTER padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	s32 coexctrl;
 
 	coexctrl = hal_btcoex_IsBTCoexCtrlAMPDUSize(padapter);
@@ -300,6 +314,7 @@ s32 rtw_btcoex_IsBTCoexCtrlAMPDUSize(PADAPTER padapter)
 
 u32 rtw_btcoex_GetAMPDUSize(PADAPTER padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u32 size;
 
 	size = hal_btcoex_GetAMPDUSize(padapter);
@@ -309,6 +324,7 @@ u32 rtw_btcoex_GetAMPDUSize(PADAPTER padapter)
 
 void rtw_btcoex_SetManualControl(PADAPTER padapter, u8 manual)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	if (_TRUE == manual)
 		hal_btcoex_SetManualControl(padapter, _TRUE);
 	else
@@ -427,11 +443,13 @@ u8 rtw_btcoex_GetRf4ceLinkState(PADAPTER padapter)
  * ================================================== */
 void rtw_btcoex_rx_ampdu_apply(PADAPTER padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	rtw_rx_ampdu_apply(padapter);
 }
 
 void rtw_btcoex_LPS_Enter(PADAPTER padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	struct pwrctrl_priv *pwrpriv;
 	u8 lpsVal;
 
@@ -445,6 +463,7 @@ void rtw_btcoex_LPS_Enter(PADAPTER padapter)
 
 u8 rtw_btcoex_LPS_Leave(PADAPTER padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	struct pwrctrl_priv *pwrpriv;
 
 
@@ -543,6 +562,7 @@ u8 rtw_btcoex_get_ant_div_cfg(PADAPTER padapter)
 _adapter *pbtcoexadapter; /* = NULL; */ /* do not initialise globals to 0 or NULL */
 u8 rtw_btcoex_btinfo_cmd(_adapter *adapter, u8 *buf, u16 len)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	struct cmd_obj *ph2c;
 	struct drvextra_cmd_parm *pdrvextra_cmd_parm;
 	u8 *btinfo;
@@ -587,6 +607,7 @@ exit:
 
 u8 rtw_btcoex_send_event_to_BT(_adapter *padapter, u8 status,  u8 event_code, u8 opcode_low, u8 opcode_high, u8 *dbg_msg)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8 localBuf[6] = "";
 	u8 *pRetPar;
 	u8	len = 0, tx_event_length = 0;
@@ -629,6 +650,7 @@ Window team code & BT team code
 
 u8 rtw_btcoex_parse_BT_info_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 #define BT_INFO_LENGTH 8
 
 	u8 curPollEnable = pcmd[0];
@@ -699,6 +721,7 @@ u8 rtw_btcoex_parse_BT_info_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 
 u8 rtw_btcoex_parse_BT_patch_ver_info_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	RTW_HCI_STATUS status = HCI_STATUS_SUCCESS;
 	u16		btPatchVer = 0x0, btHciVer = 0x0;
 	/* u16		*pU2tmp; */
@@ -749,6 +772,7 @@ u8 rtw_btcoex_parse_BT_patch_ver_info_cmd(_adapter *padapter, u8 *pcmd, u16 cmdl
 
 u8 rtw_btcoex_parse_HCI_Ver_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	RTW_HCI_STATUS status = HCI_STATUS_SUCCESS;
 	u16 hciver = pcmd[0] | pcmd[1] << 8;
 
@@ -796,6 +820,7 @@ u8 rtw_btcoex_parse_HCI_Ver_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 
 u8 rtw_btcoex_parse_WIFI_scan_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	RTW_HCI_STATUS status = HCI_STATUS_SUCCESS;
 
 	u8 localBuf[6] = "";
@@ -837,6 +862,7 @@ u8 rtw_btcoex_parse_WIFI_scan_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdle
 
 u8 rtw_btcoex_parse_HCI_link_status_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	RTW_HCI_STATUS	status = HCI_STATUS_SUCCESS;
 	struct bt_coex_info	*pcoex_info = &padapter->coex_info;
 	PBT_MGNT	pBtMgnt = &pcoex_info->BtMgnt;
@@ -942,6 +968,7 @@ u8 rtw_btcoex_parse_HCI_link_status_notify_cmd(_adapter *padapter, u8 *pcmd, u16
 
 u8 rtw_btcoex_parse_HCI_BT_coex_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8 localBuf[6] = "";
 	u8 *pRetPar;
 	u8	len = 0, tx_event_length = 0;
@@ -976,6 +1003,7 @@ u8 rtw_btcoex_parse_HCI_BT_coex_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmd
 
 u8 rtw_btcoex_parse_HCI_BT_operation_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8 localBuf[6] = "";
 	u8 *pRetPar;
 	u8	len = 0, tx_event_length = 0;
@@ -1049,6 +1077,7 @@ u8 rtw_btcoex_parse_HCI_BT_operation_notify_cmd(_adapter *padapter, u8 *pcmd, u1
 
 u8 rtw_btcoex_parse_BT_AFH_MAP_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8 localBuf[6] = "";
 	u8 *pRetPar;
 	u8	len = 0, tx_event_length = 0;
@@ -1083,6 +1112,7 @@ u8 rtw_btcoex_parse_BT_AFH_MAP_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdl
 
 u8 rtw_btcoex_parse_BT_register_val_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 
 	u8 localBuf[6] = "";
 	u8 *pRetPar;
@@ -1118,6 +1148,7 @@ u8 rtw_btcoex_parse_BT_register_val_notify_cmd(_adapter *padapter, u8 *pcmd, u16
 
 u8 rtw_btcoex_parse_HCI_BT_abnormal_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8 localBuf[6] = "";
 	u8 *pRetPar;
 	u8	len = 0, tx_event_length = 0;
@@ -1152,6 +1183,7 @@ u8 rtw_btcoex_parse_HCI_BT_abnormal_notify_cmd(_adapter *padapter, u8 *pcmd, u16
 
 u8 rtw_btcoex_parse_HCI_query_RF_status_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8 localBuf[6] = "";
 	u8 *pRetPar;
 	u8	len = 0, tx_event_length = 0;
@@ -1197,6 +1229,7 @@ u8 rtw_btcoex_parse_HCI_query_RF_status_cmd(_adapter *padapter, u8 *pcmd, u16 cm
  *	 |	OCF			             |	   OGF       | */
 void rtw_btcoex_parse_hci_extend_cmd(_adapter *padapter, u8 *pcmd, u16 len, const u16 hci_OCF)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 
 	RTW_INFO("%s: OCF: %x\n", __func__, hci_OCF);
 	switch (hci_OCF) {
@@ -1256,6 +1289,7 @@ void rtw_btcoex_parse_hci_extend_cmd(_adapter *padapter, u8 *pcmd, u16 len, cons
 
 void rtw_btcoex_parse_hci_cmd(_adapter *padapter, u8 *pcmd, u16 len)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u16 opcode = pcmd[0] | pcmd[1] << 8;
 	u16 hci_OGF = HCI_OGF(opcode);
 	u16 hci_OCF = HCI_OCF(opcode);
@@ -1276,6 +1310,7 @@ void rtw_btcoex_parse_hci_cmd(_adapter *padapter, u8 *pcmd, u16 len)
 
 u16 rtw_btcoex_parse_recv_data(u8 *msg, u8 msg_size)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8 cmp_msg1[32] = attend_ack;
 	u8 cmp_msg2[32] = leave_ack;
 	u8 cmp_msg3[32] = bt_leave;
@@ -1312,6 +1347,7 @@ u16 rtw_btcoex_parse_recv_data(u8 *msg, u8 msg_size)
 
 void rtw_btcoex_recvmsgbysocket(void *data)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8 recv_data[255];
 	u8 tx_msg[255] = leave_ack;
 	u32 len = 0;
@@ -1466,6 +1502,7 @@ void rtw_btcoex_recvmsgbysocket(void *data)
 
 u8 rtw_btcoex_sendmsgbysocket(_adapter *padapter, u8 *msg, u8 msg_size, bool force)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8 error;
 	struct msghdr	udpmsg;
 #ifdef set_fs
@@ -1521,6 +1558,7 @@ u8 rtw_btcoex_sendmsgbysocket(_adapter *padapter, u8 *msg, u8 msg_size, bool for
 
 u8 rtw_btcoex_create_kernel_socket(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	s8 kernel_socket_err;
 	u8 tx_msg[255] = attend_req;
 	struct bt_coex_info *pcoex_info = &padapter->coex_info;
@@ -1575,6 +1613,7 @@ u8 rtw_btcoex_create_kernel_socket(_adapter *padapter)
 
 void rtw_btcoex_close_kernel_socket(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	struct bt_coex_info *pcoex_info = &padapter->coex_info;
 	if (pcoex_info->sock_open & KERNEL_SOCKET_OK) {
 		RTW_INFO("release kernel socket\n");
@@ -1589,6 +1628,7 @@ void rtw_btcoex_close_kernel_socket(_adapter *padapter)
 
 void rtw_btcoex_init_socket(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 
 	u8 is_invite = _FALSE;
 	struct bt_coex_info *pcoex_info = &padapter->coex_info;
@@ -1616,6 +1656,7 @@ void rtw_btcoex_init_socket(_adapter *padapter)
 
 void rtw_btcoex_close_socket(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	struct bt_coex_info *pcoex_info = &padapter->coex_info;
 
 	RTW_INFO("%s--coex_info->is_exist: %s, pcoex_info->BT_attend:%s\n"
@@ -1641,6 +1682,7 @@ void rtw_btcoex_close_socket(_adapter *padapter)
 
 void rtw_btcoex_dump_tx_msg(u8 *tx_msg, u8 len, u8 *msg_name)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8	i = 0;
 	RTW_INFO("======> Msg name: %s\n", msg_name);
 	for (i = 0; i < len; i++)
@@ -1652,6 +1694,7 @@ void rtw_btcoex_dump_tx_msg(u8 *tx_msg, u8 len, u8 *msg_name)
 /* Porting from Windows team */
 void rtw_btcoex_SendEventExtBtCoexControl(PADAPTER padapter, u8 bNeedDbgRsp, u8 dataLen, void *pData)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8			len = 0, tx_event_length = 0;
 	u8 			localBuf[32] = "";
 	u8			*pRetPar;
@@ -1692,6 +1735,7 @@ void rtw_btcoex_SendEventExtBtCoexControl(PADAPTER padapter, u8 bNeedDbgRsp, u8 
 /* Porting from Windows team */
 void rtw_btcoex_SendEventExtBtInfoControl(PADAPTER padapter, u8 dataLen, void *pData)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	rtw_HCI_event *pEvent;
 	u8			*pRetPar;
 	u8			len = 0, tx_event_length = 0;
@@ -1733,6 +1777,7 @@ void rtw_btcoex_SendEventExtBtInfoControl(PADAPTER padapter, u8 dataLen, void *p
 
 void rtw_btcoex_SendScanNotify(PADAPTER padapter, u8 scanType)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 	u8	len = 0, tx_event_length = 0;
 	u8 	localBuf[7] = "";
 	u8	*pRetPar;
@@ -1774,6 +1819,7 @@ void rtw_btcoex_SendScanNotify(PADAPTER padapter, u8 scanType)
 
 void rtw_btcoex_set_ant_info(PADAPTER padapter)
 {
+	printk(KERN_DEBUG "rtw_btcoex.c - ");
 #ifdef CONFIG_BT_COEXIST
 	PHAL_DATA_TYPE hal = GET_HAL_DATA(padapter);
 

@@ -252,6 +252,7 @@ void dump_drv_cfg(void *sel)
 
 void dump_log_level(void *sel)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 #ifdef CONFIG_RTW_DEBUG
 	int i;
 
@@ -269,6 +270,7 @@ void dump_log_level(void *sel)
 #ifdef CONFIG_SDIO_HCI
 void sd_f0_reg_dump(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	int i;
 
 	for (i = 0x0; i <= 0xff; i++) {
@@ -286,6 +288,7 @@ void sd_f0_reg_dump(void *sel, _adapter *adapter)
 
 void sdio_local_reg_dump(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	int i, j = 1;
 
 	for (i = 0x0; i < 0x100; i += 4) {
@@ -300,6 +303,7 @@ void sdio_local_reg_dump(void *sel, _adapter *adapter)
 
 void mac_reg_dump(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	int i, j = 1;
 
 	RTW_PRINT_SEL(sel, "======= MAC REG =======\n");
@@ -356,6 +360,7 @@ void mac_reg_dump(void *sel, _adapter *adapter)
 
 void bb_reg_dump(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	int i, j = 1;
 
 	RTW_PRINT_SEL(sel, "======= BB REG =======\n");
@@ -425,6 +430,7 @@ void bb_reg_dump(void *sel, _adapter *adapter)
 
 void bb_reg_dump_ex(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	int i;
 
 	RTW_PRINT_SEL(sel, "======= BB REG =======\n");
@@ -445,6 +451,7 @@ void bb_reg_dump_ex(void *sel, _adapter *adapter)
 
 void rf_reg_dump(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	int i, j = 1, path;
 	u32 value;
 	u8 path_nums = GET_HAL_RFPATH_NUM(adapter);
@@ -466,6 +473,7 @@ void rf_reg_dump(void *sel, _adapter *adapter)
 
 void rtw_sink_rtp_seq_dbg(_adapter *adapter, u8 *ehdr_pos)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct recv_priv *precvpriv = &(adapter->recvpriv);
 	if (precvpriv->sink_udpport > 0) {
 		if (*((u16 *)(ehdr_pos + 0x24)) == cpu_to_be16(precvpriv->sink_udpport)) {
@@ -486,6 +494,7 @@ void rtw_sink_rtp_seq_dbg(_adapter *adapter, u8 *ehdr_pos)
 
 void sta_rx_reorder_ctl_dump(void *sel, struct sta_info *sta)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct recv_reorder_ctrl *reorder_ctl;
 	int i;
 
@@ -501,6 +510,7 @@ void sta_rx_reorder_ctl_dump(void *sel, struct sta_info *sta)
 
 void dump_tx_rate_bmp(void *sel, struct dvobj_priv *dvobj)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	_adapter *adapter = dvobj_get_primary_adapter(dvobj);
 	struct rf_ctl_t *rfctl = dvobj_to_rfctl(dvobj);
 	u8 bw;
@@ -541,6 +551,7 @@ void dump_tx_rate_bmp(void *sel, struct dvobj_priv *dvobj)
 
 void dump_adapters_status(void *sel, struct dvobj_priv *dvobj)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct rf_ctl_t *rfctl = dvobj_to_rfctl(dvobj);
 	int i;
 	_adapter *iface;
@@ -766,6 +777,7 @@ void dump_adapters_status(void *sel, struct dvobj_priv *dvobj)
 
 void dump_sec_cam_ent(void *sel, struct sec_cam_ent *ent, int id)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	if (id >= 0) {
 		RTW_PRINT_SEL(sel, SEC_CAM_ENT_ID_VALUE_FMT " " SEC_CAM_ENT_VALUE_FMT"\n"
 			, SEC_CAM_ENT_ID_VALUE_ARG(id), SEC_CAM_ENT_VALUE_ARG(ent));
@@ -775,6 +787,7 @@ void dump_sec_cam_ent(void *sel, struct sec_cam_ent *ent, int id)
 
 void dump_sec_cam_ent_title(void *sel, u8 has_id)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	if (has_id) {
 		RTW_PRINT_SEL(sel, SEC_CAM_ENT_ID_TITLE_FMT " " SEC_CAM_ENT_TITLE_FMT"\n"
 			, SEC_CAM_ENT_ID_TITLE_ARG, SEC_CAM_ENT_TITLE_ARG);
@@ -784,6 +797,7 @@ void dump_sec_cam_ent_title(void *sel, u8 has_id)
 
 void dump_sec_cam(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct dvobj_priv *dvobj = adapter_to_dvobj(adapter);
 	struct cam_ctl_t *cam_ctl = &dvobj->cam_ctl;
 	struct sec_cam_ent ent;
@@ -799,6 +813,7 @@ void dump_sec_cam(void *sel, _adapter *adapter)
 
 void dump_sec_cam_cache(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct dvobj_priv *dvobj = adapter_to_dvobj(adapter);
 	struct cam_ctl_t *cam_ctl = &dvobj->cam_ctl;
 	int i;
@@ -817,6 +832,7 @@ static u8 fwdl_test_wintint_rdy_fail = 0;
 
 bool rtw_fwdl_test_trigger_chksum_fail(void)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	if (fwdl_test_chksum_fail) {
 		RTW_PRINT("fwdl test case: trigger chksum_fail\n");
 		fwdl_test_chksum_fail--;
@@ -827,6 +843,7 @@ bool rtw_fwdl_test_trigger_chksum_fail(void)
 
 bool rtw_fwdl_test_trigger_wintint_rdy_fail(void)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	if (fwdl_test_wintint_rdy_fail) {
 		RTW_PRINT("fwdl test case: trigger wintint_rdy_fail\n");
 		fwdl_test_wintint_rdy_fail--;
@@ -839,6 +856,7 @@ static u8 del_rx_ampdu_test_no_tx_fail = 0;
 
 bool rtw_del_rx_ampdu_test_trigger_no_tx_fail(void)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	if (del_rx_ampdu_test_no_tx_fail) {
 		RTW_PRINT("del_rx_ampdu test case: trigger no_tx_fail\n");
 		del_rx_ampdu_test_no_tx_fail--;
@@ -891,6 +909,7 @@ u16 rtw_ap_linking_test_force_asoc_fail(void)
 #ifdef CONFIG_PROC_DEBUG
 ssize_t proc_set_write_reg(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -941,6 +960,7 @@ static u32 proc_get_read_len = 0x4;
 
 int proc_get_read_reg(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -969,6 +989,7 @@ int proc_get_read_reg(struct seq_file *m, void *v)
 
 ssize_t proc_set_read_reg(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	char tmp[16];
 	u32 addr, len;
 
@@ -1002,6 +1023,7 @@ ssize_t proc_set_read_reg(struct file *file, const char __user *buffer, size_t c
 
 int proc_get_rx_stat(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	_irqL	 irqL;
 	_list	*plist, *phead;
 	struct net_device *dev = m->private;
@@ -1050,6 +1072,7 @@ int proc_get_rx_stat(struct seq_file *m, void *v)
 
 int proc_get_tx_stat(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	_irqL	irqL;
 	_list	*plist, *phead;
 	struct net_device *dev = m->private;
@@ -1121,6 +1144,7 @@ int proc_get_tx_stat(struct seq_file *m, void *v)
 
 int proc_get_fwstate(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
@@ -1132,6 +1156,7 @@ int proc_get_fwstate(struct seq_file *m, void *v)
 
 int proc_get_sec_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct security_priv *sec = &padapter->securitypriv;
@@ -1164,6 +1189,7 @@ int proc_get_sec_info(struct seq_file *m, void *v)
 
 int proc_get_mlmext_state(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv	*pmlmeext = &padapter->mlmeextpriv;
@@ -1177,6 +1203,7 @@ int proc_get_mlmext_state(struct seq_file *m, void *v)
 #ifdef CONFIG_LAYER2_ROAMING
 int proc_get_roam_flags(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -1187,6 +1214,7 @@ int proc_get_roam_flags(struct seq_file *m, void *v)
 
 ssize_t proc_set_roam_flags(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -1215,6 +1243,7 @@ ssize_t proc_set_roam_flags(struct file *file, const char __user *buffer, size_t
 
 int proc_get_roam_param(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_priv *mlme = &adapter->mlmepriv;
@@ -1232,6 +1261,7 @@ int proc_get_roam_param(struct seq_file *m, void *v)
 
 ssize_t proc_set_roam_param(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_priv *mlme = &adapter->mlmepriv;
@@ -1270,6 +1300,7 @@ ssize_t proc_set_roam_param(struct file *file, const char __user *buffer, size_t
 
 ssize_t proc_set_roam_tgt_addr(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -1300,6 +1331,7 @@ ssize_t proc_set_roam_tgt_addr(struct file *file, const char __user *buffer, siz
 #ifdef CONFIG_RTW_80211R
 ssize_t proc_set_ft_flags(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -1327,6 +1359,7 @@ ssize_t proc_set_ft_flags(struct file *file, const char __user *buffer, size_t c
 
 int proc_get_ft_flags(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -1338,6 +1371,7 @@ int proc_get_ft_flags(struct seq_file *m, void *v)
 
 int proc_get_qos_option(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
@@ -1349,6 +1383,7 @@ int proc_get_qos_option(struct seq_file *m, void *v)
 
 int proc_get_ht_option(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
@@ -1362,6 +1397,7 @@ int proc_get_ht_option(struct seq_file *m, void *v)
 
 int proc_get_rf_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv	*pmlmeext = &padapter->mlmeextpriv;
@@ -1377,6 +1413,7 @@ int proc_get_rf_info(struct seq_file *m, void *v)
 
 int proc_get_scan_param(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv *mlmeext = &adapter->mlmeextpriv;
@@ -1434,6 +1471,7 @@ int proc_get_scan_param(struct seq_file *m, void *v)
 
 ssize_t proc_set_scan_param(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv *mlmeext = &adapter->mlmeextpriv;
@@ -1503,6 +1541,7 @@ ssize_t proc_set_scan_param(struct file *file, const char __user *buffer, size_t
 
 int proc_get_scan_abort(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	u32 pass_ms;
@@ -1517,6 +1556,7 @@ int proc_get_scan_abort(struct seq_file *m, void *v)
 #ifdef CONFIG_RTW_REPEATER_SON
 int proc_get_rson_data(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char rson_data_str[256];
@@ -1528,6 +1568,7 @@ int proc_get_rson_data(struct seq_file *m, void *v)
 
 ssize_t proc_set_rson_data(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct dvobj_priv *pdvobj = adapter_to_dvobj(padapter);
@@ -1562,6 +1603,7 @@ ssize_t proc_set_rson_data(struct file *file, const char __user *buffer, size_t 
 
 int proc_get_survey_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	_irqL irqL;
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
@@ -1653,6 +1695,7 @@ _exit:
 
 ssize_t proc_set_survey_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	u8 _status = _FALSE;
@@ -1725,6 +1768,7 @@ exit:
 #ifdef ROKU_PRIVATE
 int proc_get_infra_ap(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	struct sta_info *psta;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
@@ -1787,6 +1831,7 @@ int proc_get_infra_ap(struct seq_file *m, void *v)
 
 static int wireless_mode_to_str(u32 mode, char *str)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	str[0]='\0';
 	if (mode&WIRELESS_11A)
 		sprintf(str+strlen(str),"%s","A/");
@@ -1807,6 +1852,7 @@ static int wireless_mode_to_str(u32 mode, char *str)
 
 int proc_get_ap_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	struct sta_info *psta;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
@@ -1853,6 +1899,7 @@ int proc_get_ap_info(struct seq_file *m, void *v)
 
 ssize_t proc_reset_trx_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct recv_priv  *precvpriv = &padapter->recvpriv;
@@ -1883,6 +1930,7 @@ ssize_t proc_reset_trx_info(struct file *file, const char __user *buffer, size_t
 
 int proc_get_trx_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	int i;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
@@ -1937,6 +1985,7 @@ int proc_get_trx_info(struct seq_file *m, void *v)
 
 int proc_get_rate_ctl(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	u8 data_rate = 0, sgi = 0, data_fb = 0;
@@ -1962,6 +2011,7 @@ void phydm_fw_fix_rate(void *dm_void, u8 en, u8	macid, u8 bw, u8 rate);
 #endif
 ssize_t proc_set_rate_ctl(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	HAL_DATA_TYPE *hal_data = GET_HAL_DATA(adapter);
@@ -2057,6 +2107,7 @@ ssize_t proc_set_rate_ctl(struct file *file, const char __user *buffer, size_t c
 #ifdef CONFIG_AP_MODE
 int proc_get_bmc_tx_rate(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -2071,6 +2122,7 @@ int proc_get_bmc_tx_rate(struct seq_file *m, void *v)
 
 ssize_t proc_set_bmc_tx_rate(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -2100,6 +2152,7 @@ ssize_t proc_set_bmc_tx_rate(struct file *file, const char __user *buffer, size_
 
 int proc_get_tx_power_offset(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -2109,6 +2162,7 @@ int proc_get_tx_power_offset(struct seq_file *m, void *v)
 
 ssize_t proc_set_tx_power_offset(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -2139,6 +2193,7 @@ ssize_t proc_set_tx_power_offset(struct file *file, const char __user *buffer, s
 
 int proc_get_bw_ctl(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	u8 data_bw = 0;
@@ -2154,6 +2209,7 @@ int proc_get_bw_ctl(struct seq_file *m, void *v)
 
 ssize_t proc_set_bw_ctl(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -2186,6 +2242,7 @@ ssize_t proc_set_bw_ctl(struct file *file, const char __user *buffer, size_t cou
 #ifdef DBG_RX_COUNTER_DUMP
 int proc_get_rx_cnt_dump(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	int i;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
@@ -2200,6 +2257,7 @@ int proc_get_rx_cnt_dump(struct seq_file *m, void *v)
 }
 ssize_t proc_set_rx_cnt_dump(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -2229,6 +2287,7 @@ ssize_t proc_set_rx_cnt_dump(struct file *file, const char __user *buffer, size_
 
 ssize_t proc_set_fwdl_test_case(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	char tmp[32];
 
 	if (count < 1)
@@ -2247,6 +2306,7 @@ ssize_t proc_set_fwdl_test_case(struct file *file, const char __user *buffer, si
 
 ssize_t proc_set_del_rx_ampdu_test_case(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	char tmp[32];
 
 	if (count < 1)
@@ -2265,6 +2325,7 @@ ssize_t proc_set_del_rx_ampdu_test_case(struct file *file, const char __user *bu
 
 ssize_t proc_set_wait_hiq_empty(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	char tmp[32];
 
 	if (count < 1)
@@ -2283,6 +2344,7 @@ ssize_t proc_set_wait_hiq_empty(struct file *file, const char __user *buffer, si
 
 ssize_t proc_set_sta_linking_test(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	char tmp[32];
 
 	if (count < 1)
@@ -2310,6 +2372,7 @@ ssize_t proc_set_sta_linking_test(struct file *file, const char __user *buffer, 
 #ifdef CONFIG_AP_MODE
 ssize_t proc_set_ap_linking_test(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	char tmp[32];
 
 	if (count < 1)
@@ -2337,6 +2400,7 @@ ssize_t proc_set_ap_linking_test(struct file *file, const char __user *buffer, s
 
 int proc_get_ps_dbg_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct dvobj_priv *dvobj = padapter->dvobj;
@@ -2376,6 +2440,7 @@ int proc_get_ps_dbg_info(struct seq_file *m, void *v)
 }
 ssize_t proc_set_ps_dbg_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct dvobj_priv *dvobj = adapter->dvobj;
@@ -2408,6 +2473,7 @@ ssize_t proc_set_ps_dbg_info(struct file *file, const char __user *buffer, size_
 
 int proc_get_rx_logs(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct rx_logs *rx_logs = &padapter->rx_logs;
@@ -2506,6 +2572,7 @@ int proc_get_rx_logs(struct seq_file *m, void *v)
 
 int proc_get_tx_logs(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct tx_logs *tx_logs = &padapter->tx_logs;
@@ -2622,6 +2689,7 @@ int proc_get_tx_logs(struct seq_file *m, void *v)
 
 int proc_get_int_logs(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -2669,6 +2737,7 @@ int proc_get_int_logs(struct seq_file *m, void *v)
 
 int proc_get_hw_status(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct dvobj_priv *dvobj = padapter->dvobj;
@@ -2692,6 +2761,7 @@ int proc_get_hw_status(struct seq_file *m, void *v)
 
 ssize_t proc_set_hw_status(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct dvobj_priv *dvobj = padapter->dvobj;
@@ -2723,6 +2793,7 @@ ssize_t proc_set_hw_status(struct file *file, const char __user *buffer, size_t 
 #ifdef CONFIG_HUAWEI_PROC
 int proc_get_huawei_trx_info(struct seq_file *sel, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = sel->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct dm_struct *dm = adapter_to_phydm(padapter);
@@ -2780,6 +2851,7 @@ int proc_get_huawei_trx_info(struct seq_file *sel, void *v)
 
 int proc_get_trx_info_debug(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -2794,6 +2866,7 @@ int proc_get_trx_info_debug(struct seq_file *m, void *v)
 
 int proc_get_rx_signal(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -2836,6 +2909,7 @@ int proc_get_rx_signal(struct seq_file *m, void *v)
 
 ssize_t proc_set_rx_signal(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -2879,6 +2953,7 @@ ssize_t proc_set_rx_signal(struct file *file, const char __user *buffer, size_t 
 
 int proc_get_mac_rptbuf(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 #ifdef CONFIG_RTL8814A
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
@@ -2911,6 +2986,7 @@ int proc_get_mac_rptbuf(struct seq_file *m, void *v)
 
 int proc_get_ht_enable(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -2923,6 +2999,7 @@ int proc_get_ht_enable(struct seq_file *m, void *v)
 
 ssize_t proc_set_ht_enable(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -2953,6 +3030,7 @@ ssize_t proc_set_ht_enable(struct file *file, const char __user *buffer, size_t 
 
 int proc_get_bw_mode(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -2965,6 +3043,7 @@ int proc_get_bw_mode(struct seq_file *m, void *v)
 
 ssize_t proc_set_bw_mode(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -2999,6 +3078,7 @@ ssize_t proc_set_bw_mode(struct file *file, const char __user *buffer, size_t co
 
 int proc_get_ampdu_enable(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3011,6 +3091,7 @@ int proc_get_ampdu_enable(struct seq_file *m, void *v)
 
 ssize_t proc_set_ampdu_enable(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3043,6 +3124,7 @@ ssize_t proc_set_ampdu_enable(struct file *file, const char __user *buffer, size
 
 void dump_regsty_rx_ampdu_size_limit(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct registry_priv *regsty = adapter_to_regsty(adapter);
 	int i;
 
@@ -3058,6 +3140,7 @@ void dump_regsty_rx_ampdu_size_limit(void *sel, _adapter *adapter)
 
 int proc_get_rx_ampdu(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -3086,6 +3169,7 @@ int proc_get_rx_ampdu(struct seq_file *m, void *v)
 
 ssize_t proc_set_rx_ampdu(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -3117,6 +3201,7 @@ ssize_t proc_set_rx_ampdu(struct file *file, const char __user *buffer, size_t c
 
 int proc_get_rx_ampdu_factor(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -3130,6 +3215,7 @@ int proc_get_rx_ampdu_factor(struct seq_file *m, void *v)
 ssize_t proc_set_rx_ampdu_factor(struct file *file, const char __user *buffer
 				 , size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -3162,6 +3248,7 @@ ssize_t proc_set_rx_ampdu_factor(struct file *file, const char __user *buffer
 
 int proc_get_tx_max_agg_num(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -3175,6 +3262,7 @@ int proc_get_tx_max_agg_num(struct seq_file *m, void *v)
 ssize_t proc_set_tx_max_agg_num(struct file *file, const char __user *buffer
 				 , size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -3204,6 +3292,7 @@ ssize_t proc_set_tx_max_agg_num(struct file *file, const char __user *buffer
 
 int proc_get_rx_ampdu_density(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -3216,6 +3305,7 @@ int proc_get_rx_ampdu_density(struct seq_file *m, void *v)
 
 ssize_t proc_set_rx_ampdu_density(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -3248,6 +3338,7 @@ ssize_t proc_set_rx_ampdu_density(struct file *file, const char __user *buffer, 
 
 int proc_get_tx_ampdu_density(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -3260,6 +3351,7 @@ int proc_get_tx_ampdu_density(struct seq_file *m, void *v)
 
 ssize_t proc_set_tx_ampdu_density(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -3293,6 +3385,7 @@ ssize_t proc_set_tx_ampdu_density(struct file *file, const char __user *buffer, 
 #ifdef CONFIG_TX_AMSDU
 int proc_get_tx_amsdu(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct xmit_priv *pxmitpriv = &padapter->xmitpriv;
@@ -3311,6 +3404,7 @@ int proc_get_tx_amsdu(struct seq_file *m, void *v)
 
 ssize_t proc_set_tx_amsdu(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct xmit_priv *pxmitpriv = &padapter->xmitpriv;
@@ -3351,6 +3445,7 @@ ssize_t proc_set_tx_amsdu(struct file *file, const char __user *buffer, size_t c
 
 int proc_get_tx_amsdu_rate(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -3362,6 +3457,7 @@ int proc_get_tx_amsdu_rate(struct seq_file *m, void *v)
 
 ssize_t proc_set_tx_amsdu_rate(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -3392,6 +3488,7 @@ ssize_t proc_set_tx_amsdu_rate(struct file *file, const char __user *buffer, siz
 
 int proc_get_en_fwps(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3405,6 +3502,7 @@ int proc_get_en_fwps(struct seq_file *m, void *v)
 
 ssize_t proc_set_en_fwps(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3449,6 +3547,7 @@ int proc_get_two_path_rssi(struct seq_file *m, void *v)
 #ifdef CONFIG_80211N_HT
 void rtw_dump_dft_phy_cap(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct mlme_priv *pmlmepriv = &adapter->mlmepriv;
 	struct ht_priv	*phtpriv = &pmlmepriv->htpriv;
 	#ifdef CONFIG_80211AC_VHT
@@ -3483,6 +3582,7 @@ void rtw_dump_dft_phy_cap(void *sel, _adapter *adapter)
 
 void rtw_get_dft_phy_cap(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	RTW_PRINT_SEL(sel, "\n ======== PHY CAP protocol ========\n");
 	rtw_ht_use_default_setting(adapter);
 	#ifdef CONFIG_80211AC_VHT
@@ -3495,6 +3595,7 @@ void rtw_get_dft_phy_cap(void *sel, _adapter *adapter)
 
 void rtw_dump_drv_phy_cap(void *sel, _adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct registry_priv	*pregistry_priv = &adapter->registrypriv;
 
 	RTW_PRINT_SEL(sel, "\n ======== DRV's configuration ========\n");
@@ -3550,6 +3651,7 @@ void rtw_dump_drv_phy_cap(void *sel, _adapter *adapter)
 
 int proc_get_stbc_cap(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3562,6 +3664,7 @@ int proc_get_stbc_cap(struct seq_file *m, void *v)
 
 ssize_t proc_set_stbc_cap(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3590,6 +3693,7 @@ ssize_t proc_set_stbc_cap(struct file *file, const char __user *buffer, size_t c
 }
 int proc_get_rx_stbc(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3602,6 +3706,7 @@ int proc_get_rx_stbc(struct seq_file *m, void *v)
 
 ssize_t proc_set_rx_stbc(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3631,6 +3736,7 @@ ssize_t proc_set_rx_stbc(struct file *file, const char __user *buffer, size_t co
 }
 int proc_get_ldpc_cap(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3643,6 +3749,7 @@ int proc_get_ldpc_cap(struct seq_file *m, void *v)
 
 ssize_t proc_set_ldpc_cap(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3672,6 +3779,7 @@ ssize_t proc_set_ldpc_cap(struct file *file, const char __user *buffer, size_t c
 #ifdef CONFIG_BEAMFORMING
 int proc_get_txbf_cap(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3684,6 +3792,7 @@ int proc_get_txbf_cap(struct seq_file *m, void *v)
 
 ssize_t proc_set_txbf_cap(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -3769,6 +3878,7 @@ ssize_t proc_set_txbf_cap(struct file *file, const char __user *buffer, size_t c
 
 int proc_get_all_sta_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_irqL irqL;
 	struct sta_info *psta;
@@ -3877,6 +3987,7 @@ int proc_get_all_sta_info(struct seq_file *m, void *v)
 #ifdef CONFIG_PREALLOC_RX_SKB_BUFFER
 int proc_get_rtkm_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct recv_priv	*precvpriv = &padapter->recvpriv;
@@ -3903,6 +4014,7 @@ extern atomic_t _malloc_size;;
 
 int proc_get_malloc_cnt(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	RTW_PRINT_SEL(m, "_malloc_cnt=%d\n", atomic_read(&_malloc_cnt));
 	RTW_PRINT_SEL(m, "_malloc_size=%d\n", atomic_read(&_malloc_size));
 
@@ -3913,6 +4025,7 @@ int proc_get_malloc_cnt(struct seq_file *m, void *v)
 #ifdef CONFIG_FIND_BEST_CHANNEL
 int proc_get_best_channel(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct rf_ctl_t *rfctl = adapter_to_rfctl(padapter);
@@ -3968,6 +4081,7 @@ int proc_get_best_channel(struct seq_file *m, void *v)
 
 ssize_t proc_set_best_channel(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct rf_ctl_t *rfctl = adapter_to_rfctl(padapter);
@@ -3996,6 +4110,7 @@ ssize_t proc_set_best_channel(struct file *file, const char __user *buffer, size
 #ifdef CONFIG_BT_COEXIST
 int proc_get_btcoex_dbg(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	PADAPTER padapter;
 	char buf[512] = {0};
@@ -4010,6 +4125,7 @@ int proc_get_btcoex_dbg(struct seq_file *m, void *v)
 
 ssize_t proc_set_btcoex_dbg(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	PADAPTER padapter;
 	u8 tmp[80] = {0};
@@ -4068,6 +4184,7 @@ ssize_t proc_set_btcoex_dbg(struct file *file, const char __user *buffer, size_t
 
 int proc_get_btcoex_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	PADAPTER padapter;
 	const u32 bufsize = 40 * 100;
@@ -4091,6 +4208,7 @@ int proc_get_btcoex_info(struct seq_file *m, void *v)
 #ifdef CONFIG_RF4CE_COEXIST
 int proc_get_rf4ce_state(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	u8 state = 0, voice = 0;
@@ -4112,6 +4230,7 @@ int proc_get_rf4ce_state(struct seq_file *m, void *v)
  */
 ssize_t proc_set_rf4ce_state(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -4141,6 +4260,7 @@ ssize_t proc_set_rf4ce_state(struct file *file, const char __user *buffer, size_
 #if defined(DBG_CONFIG_ERROR_DETECT)
 int proc_get_sreset(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct dvobj_priv *psdpriv = padapter->dvobj;
@@ -4162,6 +4282,7 @@ int proc_get_sreset(struct seq_file *m, void *v)
 
 ssize_t proc_set_sreset(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
@@ -4201,6 +4322,7 @@ ssize_t proc_set_sreset(struct file *file, const char __user *buffer, size_t cou
 
 ssize_t proc_set_pci_bridge_conf_space(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct dvobj_priv       *pdvobjpriv = adapter_to_dvobj(padapter);
@@ -4249,6 +4371,7 @@ ssize_t proc_set_pci_bridge_conf_space(struct file *file, const char __user *buf
 
 int proc_get_pci_bridge_conf_space(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *) rtw_netdev_priv(dev);
 	struct dvobj_priv       *pdvobjpriv = adapter_to_dvobj(padapter);
@@ -4276,6 +4399,7 @@ int proc_get_pci_bridge_conf_space(struct seq_file *m, void *v)
 
 ssize_t proc_set_pci_conf_space(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct dvobj_priv       *pdvobjpriv = adapter_to_dvobj(padapter);
@@ -4327,6 +4451,7 @@ ssize_t proc_set_pci_conf_space(struct file *file, const char __user *buffer, si
 
 int proc_get_pci_conf_space(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *) rtw_netdev_priv(dev);
 	struct dvobj_priv       *pdvobjpriv = adapter_to_dvobj(padapter);
@@ -4355,6 +4480,7 @@ int proc_get_pci_conf_space(struct seq_file *m, void *v)
 
 int proc_get_pci_aspm(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *) rtw_netdev_priv(dev);
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(padapter);
@@ -4418,6 +4544,7 @@ int proc_get_pci_aspm(struct seq_file *m, void *v)
 
 int proc_get_rx_ring(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	_irqL irqL;
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *) rtw_netdev_priv(dev);
@@ -4459,6 +4586,7 @@ int proc_get_rx_ring(struct seq_file *m, void *v)
 
 int proc_get_tx_ring(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	_irqL irqL;
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *) rtw_netdev_priv(dev);
@@ -4505,6 +4633,7 @@ int proc_get_tx_ring(struct seq_file *m, void *v)
 #ifdef DBG_TXBD_DESC_DUMP
 int proc_get_tx_ring_ext(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	_irqL irqL;
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *) rtw_netdev_priv(dev);
@@ -4606,6 +4735,7 @@ int proc_get_tx_ring_ext(struct seq_file *m, void *v)
 
 ssize_t proc_set_tx_ring_ext(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	_irqL irqL;
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
@@ -4652,6 +4782,7 @@ ssize_t proc_set_tx_ring_ext(struct file *file, const char __user *buffer, size_
 #ifdef CONFIG_WOWLAN
 int proc_get_pattern_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(padapter);
@@ -4713,6 +4844,7 @@ int proc_get_pattern_info(struct seq_file *m, void *v)
 ssize_t proc_set_pattern_info(struct file *file, const char __user *buffer,
 			      size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(padapter);
@@ -4763,6 +4895,7 @@ ssize_t proc_set_pattern_info(struct file *file, const char __user *buffer,
 
 int proc_get_wakeup_event(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv  *registry_par = &padapter->registrypriv;
@@ -4774,6 +4907,7 @@ int proc_get_wakeup_event(struct seq_file *m, void *v)
 ssize_t proc_set_wakeup_event(struct file *file, const char __user *buffer,
 			      size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct pwrctrl_priv *pwrctrlpriv = adapter_to_pwrctl(padapter);
@@ -4818,6 +4952,7 @@ ssize_t proc_set_wakeup_event(struct file *file, const char __user *buffer,
 
 int proc_get_wakeup_reason(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(padapter);
@@ -4831,6 +4966,7 @@ int proc_get_wakeup_reason(struct seq_file *m, void *v)
 #ifdef CONFIG_GPIO_WAKEUP
 int proc_get_wowlan_gpio_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(padapter);
@@ -4850,6 +4986,7 @@ int proc_get_wowlan_gpio_info(struct seq_file *m, void *v)
 ssize_t proc_set_wowlan_gpio_info(struct file *file, const char __user *buffer,
 				  size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(padapter);
@@ -4907,6 +5044,7 @@ ssize_t proc_set_wowlan_gpio_info(struct file *file, const char __user *buffer,
 #ifdef CONFIG_P2P_WOWLAN
 int proc_get_p2p_wowlan_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct wifidirect_info	*pwdinfo = &(padapter->wdinfo);
@@ -4938,6 +5076,7 @@ int proc_get_p2p_wowlan_info(struct seq_file *m, void *v)
 #ifdef CONFIG_BCN_CNT_CONFIRM_HDL
 int proc_get_new_bcn_max(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	extern int new_bcn_max;
 
 	RTW_PRINT_SEL(m, "%d", new_bcn_max);
@@ -4946,6 +5085,7 @@ int proc_get_new_bcn_max(struct seq_file *m, void *v)
 
 ssize_t proc_set_new_bcn_max(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	char tmp[32];
 	extern int new_bcn_max;
 
@@ -4966,6 +5106,7 @@ ssize_t proc_set_new_bcn_max(struct file *file, const char __user *buffer, size_
 #ifdef CONFIG_POWER_SAVING
 int proc_get_ps_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(padapter);
@@ -5072,6 +5213,7 @@ int proc_get_ps_info(struct seq_file *m, void *v)
 
 ssize_t proc_set_ps_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	struct _ADAPTER *adapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[8];
@@ -5140,6 +5282,7 @@ exit:
 #ifdef CONFIG_WMMPS_STA
 int proc_get_wmmps_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -5179,6 +5322,7 @@ int proc_get_wmmps_info(struct seq_file *m, void *v)
 
 ssize_t proc_set_wmmps_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -5219,6 +5363,7 @@ ssize_t proc_set_wmmps_info(struct file *file, const char __user *buffer, size_t
 #ifdef CONFIG_TDLS
 int proc_get_tdls_enable(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv *pregpriv = &padapter->registrypriv;
@@ -5231,6 +5376,7 @@ int proc_get_tdls_enable(struct seq_file *m, void *v)
 
 ssize_t proc_set_tdls_enable(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct registry_priv	*pregpriv = &padapter->registrypriv;
@@ -5262,6 +5408,7 @@ ssize_t proc_set_tdls_enable(struct file *file, const char __user *buffer, size_
 
 static int proc_tdls_display_tdls_function_info(struct seq_file *m)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct tdls_info *ptdlsinfo = &padapter->tdlsinfo;
@@ -5342,6 +5489,7 @@ static int proc_tdls_display_tdls_function_info(struct seq_file *m)
 
 static int proc_tdls_display_network_info(struct seq_file *m)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
@@ -5460,6 +5608,7 @@ static int proc_tdls_display_network_info(struct seq_file *m)
 
 static int proc_tdls_display_tdls_sta_info(struct seq_file *m)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct sta_priv *pstapriv = &padapter->stapriv;
@@ -5638,6 +5787,7 @@ static int proc_tdls_display_tdls_sta_info(struct seq_file *m)
 
 int proc_get_tdls_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
@@ -5669,6 +5819,7 @@ int proc_get_tdls_info(struct seq_file *m, void *v)
 
 int proc_get_monitor(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
@@ -5686,6 +5837,7 @@ int proc_get_monitor(struct seq_file *m, void *v)
 
 ssize_t proc_set_monitor(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	char tmp[32];
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
@@ -5718,6 +5870,7 @@ ssize_t proc_set_monitor(struct file *file, const char __user *buffer, size_t co
 #ifdef DBG_XMIT_BLOCK
 int proc_get_xmit_block(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -5728,6 +5881,7 @@ int proc_get_xmit_block(struct seq_file *m, void *v)
 
 ssize_t proc_set_xmit_block(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -5765,6 +5919,7 @@ ssize_t proc_set_xmit_block(struct file *file, const char __user *buffer, size_t
 #include <hal_data.h>
 int proc_get_efuse_map(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	PHAL_DATA_TYPE pHalData = GET_HAL_DATA(padapter);
@@ -5828,6 +5983,7 @@ int proc_get_efuse_map(struct seq_file *m, void *v)
 
 ssize_t proc_set_efuse_map(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 #if 0
 	char tmp[256] = {0};
 	u32 addr, cnts;
@@ -5941,6 +6097,7 @@ ssize_t proc_set_tx_sa_query(struct file *file, const char __user *buffer, size_
 
 int proc_get_tx_sa_query(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -5950,6 +6107,7 @@ int proc_get_tx_sa_query(struct seq_file *m, void *v)
 
 ssize_t proc_set_tx_deauth(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv	*pmlmeext = &padapter->mlmeextpriv;
@@ -6045,6 +6203,7 @@ ssize_t proc_set_tx_deauth(struct file *file, const char __user *buffer, size_t 
 
 int proc_get_tx_deauth(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -6054,6 +6213,7 @@ int proc_get_tx_deauth(struct seq_file *m, void *v)
 
 ssize_t proc_set_tx_auth(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv	*pmlmeext = &padapter->mlmeextpriv;
@@ -6104,6 +6264,7 @@ ssize_t proc_set_tx_auth(struct file *file, const char __user *buffer, size_t co
 
 int proc_get_tx_auth(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -6116,6 +6277,7 @@ int proc_get_tx_auth(struct seq_file *m, void *v)
 static u32 phase_idx;
 int proc_get_pathb_phase(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -6125,6 +6287,7 @@ int proc_get_pathb_phase(struct seq_file *m, void *v)
 
 ssize_t proc_set_pathb_phase(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6157,6 +6320,7 @@ ssize_t proc_set_pathb_phase(struct file *file, const char __user *buffer, size_
 #ifdef CONFIG_MCC_MODE
 int proc_get_mcc_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -6167,6 +6331,7 @@ int proc_get_mcc_info(struct seq_file *m, void *v)
 
 int proc_get_mcc_policy_table(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -6176,6 +6341,7 @@ int proc_get_mcc_policy_table(struct seq_file *m, void *v)
 
 ssize_t proc_set_mcc_enable(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6223,6 +6389,7 @@ ssize_t proc_set_mcc_enable(struct file *file, const char __user *buffer, size_t
 
 ssize_t proc_set_mcc_duration(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6279,6 +6446,7 @@ ssize_t proc_set_mcc_duration(struct file *file, const char __user *buffer, size
 #ifdef CONFIG_MCC_PHYDM_OFFLOAD
 ssize_t proc_set_mcc_phydm_offload_enable(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6320,6 +6488,7 @@ ssize_t proc_set_mcc_phydm_offload_enable(struct file *file, const char __user *
 
 ssize_t proc_set_mcc_single_tx_criteria(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6370,6 +6539,7 @@ ssize_t proc_set_mcc_single_tx_criteria(struct file *file, const char __user *bu
 
 ssize_t proc_set_mcc_ap_bw20_target_tp(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6411,6 +6581,7 @@ ssize_t proc_set_mcc_ap_bw20_target_tp(struct file *file, const char __user *buf
 
 ssize_t proc_set_mcc_ap_bw40_target_tp(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6452,6 +6623,7 @@ ssize_t proc_set_mcc_ap_bw40_target_tp(struct file *file, const char __user *buf
 
 ssize_t proc_set_mcc_ap_bw80_target_tp(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6493,6 +6665,7 @@ ssize_t proc_set_mcc_ap_bw80_target_tp(struct file *file, const char __user *buf
 
 ssize_t proc_set_mcc_sta_bw20_target_tp(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6534,6 +6707,7 @@ ssize_t proc_set_mcc_sta_bw20_target_tp(struct file *file, const char __user *bu
 
 ssize_t proc_set_mcc_sta_bw40_target_tp(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6575,6 +6749,7 @@ ssize_t proc_set_mcc_sta_bw40_target_tp(struct file *file, const char __user *bu
 
 ssize_t proc_set_mcc_sta_bw80_target_tp(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[255];
@@ -6617,6 +6792,7 @@ ssize_t proc_set_mcc_sta_bw80_target_tp(struct file *file, const char __user *bu
 
 int proc_get_ack_timeout(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	u8 ack_timeout_val;
@@ -6639,6 +6815,7 @@ int proc_get_ack_timeout(struct seq_file *m, void *v)
 
 ssize_t proc_set_ack_timeout(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -6681,6 +6858,7 @@ ssize_t proc_set_ack_timeout(struct file *file, const char __user *buffer, size_
 
 ssize_t proc_set_fw_offload(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	_adapter *pri_adapter = GET_PRIMARY_ADAPTER(adapter);
@@ -6726,6 +6904,7 @@ ssize_t proc_set_fw_offload(struct file *file, const char __user *buffer, size_t
 
 int proc_get_fw_offload(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	HAL_DATA_TYPE *hal = GET_HAL_DATA(adapter);
@@ -6739,6 +6918,7 @@ int proc_get_fw_offload(struct seq_file *m, void *v)
 extern void rtw_hal_set_fw_ap_bcn_offload_cmd(_adapter *adapter, bool fw_bcn_en, u8 tbtt_rpt_map);
 ssize_t proc_set_fw_tbtt_rpt(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -6776,6 +6956,7 @@ ssize_t proc_set_fw_tbtt_rpt(struct file *file, const char __user *buffer, size_
 
 int proc_get_fw_tbtt_rpt(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct dvobj_priv *dvobj = adapter_to_dvobj(adapter);
@@ -6790,6 +6971,7 @@ int proc_get_fw_tbtt_rpt(struct seq_file *m, void *v)
 #ifdef CONFIG_CTRL_TXSS_BY_TP
 ssize_t proc_set_txss_tp(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
@@ -6841,6 +7023,7 @@ ssize_t proc_set_txss_tp(struct file *file, const char __user *buffer, size_t co
 
 int proc_get_txss_tp(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
@@ -6854,6 +7037,7 @@ int proc_get_txss_tp(struct seq_file *m, void *v)
 #ifdef DBG_CTRL_TXSS
 ssize_t proc_set_txss_ctrl(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
@@ -6897,6 +7081,7 @@ ssize_t proc_set_txss_ctrl(struct file *file, const char __user *buffer, size_t 
 
 int proc_get_txss_ctrl(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
@@ -6911,6 +7096,7 @@ int proc_get_txss_ctrl(struct seq_file *m, void *v)
 #ifdef CONFIG_DBG_RF_CAL
 int proc_get_iqk_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -6919,6 +7105,7 @@ int proc_get_iqk_info(struct seq_file *m, void *v)
 
 ssize_t proc_set_iqk(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -6950,6 +7137,7 @@ ssize_t proc_set_iqk(struct file *file, const char __user *buffer, size_t count,
 
 int proc_get_lck_info(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
@@ -6958,6 +7146,7 @@ int proc_get_lck_info(struct seq_file *m, void *v)
 
 ssize_t proc_set_lck(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 	char tmp[32];
@@ -6990,6 +7179,7 @@ ssize_t proc_set_lck(struct file *file, const char __user *buffer, size_t count,
 #ifdef CONFIG_LPS_CHK_BY_TP
 ssize_t proc_set_lps_chk_tp(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(adapter);
@@ -7057,6 +7247,7 @@ ssize_t proc_set_lps_chk_tp(struct file *file, const char __user *buffer, size_t
 
 int proc_get_lps_chk_tp(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(adapter);
@@ -7075,6 +7266,7 @@ int proc_get_lps_chk_tp(struct seq_file *m, void *v)
 #ifdef CONFIG_SUPPORT_STATIC_SMPS
 ssize_t proc_set_smps(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = data;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
@@ -7138,6 +7330,7 @@ ssize_t proc_set_smps(struct file *file, const char __user *buffer, size_t count
 
 int proc_get_smps(struct seq_file *m, void *v)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 	struct net_device *dev = m->private;
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
@@ -7158,6 +7351,7 @@ int proc_get_smps(struct seq_file *m, void *v)
 inline void RTW_BUF_DUMP_SEL(uint _loglevel, void *sel, u8 *_titlestring,
 					bool _idx_show, const u8 *_hexdata, int _hexdatalen)
 {
+	printk(KERN_DEBUG "rtw_debug.c - ");
 #ifdef CONFIG_RTW_DEBUG
 	int __i;
 	u8 *ptr = (u8 *)_hexdata;

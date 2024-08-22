@@ -29,6 +29,7 @@ struct ndpa_sta_info {
 
 static void _get_txvector_parameter(PADAPTER adapter, struct sta_info *sta, u8 *g_id, u16 *p_aid)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct mlme_priv *mlme;
 	u16 aid;
 	u8 *bssid;
@@ -93,6 +94,7 @@ static void _get_txvector_parameter(PADAPTER adapter, struct sta_info *sta, u8 *
 static void _get_sta_beamform_cap(PADAPTER adapter, struct sta_info *sta,
 	u8 *sta_bf_cap, u8 *sounding_dim, u8 *comp_steering)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info *info;
 	struct ht_priv *ht;
 #ifdef CONFIG_80211AC_VHT
@@ -164,6 +166,7 @@ static void _get_sta_beamform_cap(PADAPTER adapter, struct sta_info *sta,
 
 static u8 _send_ht_ndpa_packet(PADAPTER adapter, u8 *ra, enum channel_width bw)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	/* General */
 	struct xmit_priv		*pxmitpriv;
 	struct mlme_ext_priv		*pmlmeext;
@@ -262,6 +265,7 @@ static u8 _send_ht_ndpa_packet(PADAPTER adapter, u8 *ra, enum channel_width bw)
 
 static u8 _send_vht_ndpa_packet(PADAPTER adapter, u8 *ra, u16 aid, enum channel_width bw)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	/* General */
 	struct xmit_priv		*pxmitpriv;
 	struct mlme_ext_priv		*pmlmeext;
@@ -368,6 +372,7 @@ static u8 _send_vht_ndpa_packet(PADAPTER adapter, u8 *ra, u16 aid, enum channel_
 
 static u8 _send_vht_mu_ndpa_packet(PADAPTER adapter, enum channel_width bw)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	/* General */
 	struct xmit_priv		*pxmitpriv;
 	struct mlme_ext_priv		*pmlmeext;
@@ -485,6 +490,7 @@ static u8 _send_vht_mu_ndpa_packet(PADAPTER adapter, enum channel_width bw)
 
 static u8 _send_bf_report_poll(PADAPTER adapter, u8 *ra, u8 bFinalPoll)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	/* General */
 	struct xmit_priv *pxmitpriv;
 	struct xmit_frame *pmgntframe;
@@ -547,6 +553,7 @@ static u8 _send_bf_report_poll(PADAPTER adapter, u8 *ra, u8 bFinalPoll)
 
 static void _sounding_update_min_period(PADAPTER adapter, u16 period, u8 leave)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info *info;
 	struct beamformee_entry *bfee;
 	u8 i = 0;
@@ -581,6 +588,7 @@ static void _sounding_update_min_period(PADAPTER adapter, u16 period, u8 leave)
 
 static void _sounding_init(struct sounding_info *sounding)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	_rtw_memset(sounding->su_sounding_list, 0xFF, MAX_NUM_BEAMFORMEE_SU);
 	_rtw_memset(sounding->mu_sounding_list, 0xFF, MAX_NUM_BEAMFORMEE_MU);
 	sounding->state = SOUNDING_STATE_NONE;
@@ -592,6 +600,7 @@ static void _sounding_init(struct sounding_info *sounding)
 
 static void _sounding_reset_vars(PADAPTER adapter)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info	*info;
 	struct sounding_info *sounding;
 	u8 idx;
@@ -624,6 +633,7 @@ static void _sounding_reset_vars(PADAPTER adapter)
  */
 static int _sounding_get_list(PADAPTER adapter)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info	*info;
 	struct sounding_info *sounding;
 	struct beamformee_entry *bfee;
@@ -711,6 +721,7 @@ static int _sounding_get_list(PADAPTER adapter)
 
 static void _sounding_handler(PADAPTER adapter)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info	*info;
 	struct sounding_info *sounding;
 	struct beamformee_entry *bfee;
@@ -860,6 +871,7 @@ static void _sounding_handler(PADAPTER adapter)
 
 static void _sounding_force_stop(PADAPTER adapter)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info	*info;
 	struct sounding_info *sounding;
 
@@ -882,6 +894,7 @@ static void _sounding_force_stop(PADAPTER adapter)
 
 static void _sounding_timer_handler(void *FunctionContext)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	PADAPTER adapter;
 	struct beamforming_info	*info;
 	struct sounding_info *sounding;
@@ -926,6 +939,7 @@ static void _sounding_timer_handler(void *FunctionContext)
 
 static void _sounding_timeout_timer_handler(void *FunctionContext)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	PADAPTER adapter;
 	struct beamforming_info	*info;
 	struct sounding_info *sounding;
@@ -958,6 +972,7 @@ static void _sounding_timeout_timer_handler(void *FunctionContext)
 
 static struct beamformer_entry *_bfer_get_free_entry(PADAPTER adapter)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	u8 i = 0;
 	struct beamforming_info *info;
 	struct beamformer_entry *bfer;
@@ -976,6 +991,7 @@ static struct beamformer_entry *_bfer_get_free_entry(PADAPTER adapter)
 
 static struct beamformer_entry *_bfer_get_entry_by_addr(PADAPTER adapter, u8 *ra)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	u8 i = 0;
 	struct beamforming_info *info;
 	struct beamformer_entry *bfer;
@@ -997,6 +1013,7 @@ static struct beamformer_entry *_bfer_get_entry_by_addr(PADAPTER adapter, u8 *ra
 static struct beamformer_entry *_bfer_add_entry(PADAPTER adapter,
 	struct sta_info *sta, u8 bf_cap, u8 sounding_dim, u8 comp_steering)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct mlme_priv *mlme;
 	struct beamforming_info *info;
 	struct beamformer_entry *bfer;
@@ -1045,6 +1062,7 @@ static struct beamformer_entry *_bfer_add_entry(PADAPTER adapter,
 
 static void _bfer_remove_entry(PADAPTER adapter, struct beamformer_entry *entry)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info *info;
 
 
@@ -1068,6 +1086,7 @@ static void _bfer_remove_entry(PADAPTER adapter, struct beamformer_entry *entry)
 
 static u8 _bfer_set_entry_gid(PADAPTER adapter, u8 *addr, u8 *gid, u8 *position)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamformer_entry bfer;
 
 	memset(&bfer, 0, sizeof(bfer));
@@ -1088,6 +1107,7 @@ static u8 _bfer_set_entry_gid(PADAPTER adapter, u8 *addr, u8 *gid, u8 *position)
 
 static struct beamformee_entry *_bfee_get_free_entry(PADAPTER adapter)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	u8 i = 0;
 	struct beamforming_info *info;
 	struct beamformee_entry *bfee;
@@ -1106,6 +1126,7 @@ static struct beamformee_entry *_bfee_get_free_entry(PADAPTER adapter)
 
 static struct beamformee_entry *_bfee_get_entry_by_addr(PADAPTER adapter, u8 *ra)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	u8 i = 0;
 	struct beamforming_info *info;
 	struct beamformee_entry *bfee;
@@ -1126,6 +1147,7 @@ static struct beamformee_entry *_bfee_get_entry_by_addr(PADAPTER adapter, u8 *ra
 
 static u8 _bfee_get_first_su_entry_idx(PADAPTER adapter, struct beamformee_entry *ignore)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info *info;
 	struct beamformee_entry *bfee;
 	u8 i;
@@ -1159,6 +1181,7 @@ static u8 _bfee_get_first_su_entry_idx(PADAPTER adapter, struct beamformee_entry
  */
 static u8 _bfee_get_first_mu_entry_idx(PADAPTER adapter, struct beamformee_entry *ignore)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info *info;
 	struct beamformee_entry *bfee;
 	u8 i;
@@ -1182,6 +1205,7 @@ static u8 _bfee_get_first_mu_entry_idx(PADAPTER adapter, struct beamformee_entry
 static struct beamformee_entry *_bfee_add_entry(PADAPTER adapter,
 	struct sta_info *sta, u8 bf_cap, u8 sounding_dim, u8 comp_steering)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct mlme_priv *mlme;
 	struct beamforming_info *info;
 	struct beamformee_entry *bfee;
@@ -1292,6 +1316,7 @@ static struct beamformee_entry *_bfee_add_entry(PADAPTER adapter,
 
 static void _bfee_remove_entry(PADAPTER adapter, struct beamformee_entry *entry)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info *info;
 	u8 idx;
 
@@ -1335,6 +1360,7 @@ static void _bfee_remove_entry(PADAPTER adapter, struct beamformee_entry *entry)
 
 static enum beamforming_cap _bfee_get_entry_cap_by_macid(PADAPTER adapter, u8 macid)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info *info;
 	struct beamformee_entry *bfee;
 	u8 i;
@@ -1355,6 +1381,7 @@ static enum beamforming_cap _bfee_get_entry_cap_by_macid(PADAPTER adapter, u8 ma
 
 static void _beamforming_enter(PADAPTER adapter, void *p)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct mlme_priv *mlme;
 	struct ht_priv *htpriv;
 #ifdef CONFIG_80211AC_VHT
@@ -1452,11 +1479,13 @@ static void _beamforming_enter(PADAPTER adapter, void *p)
 
 static void _beamforming_reset(PADAPTER adapter)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	RTW_ERR("%s: Not ready!!\n", __FUNCTION__);
 }
 
 static void _beamforming_leave(PADAPTER adapter, u8 *ra)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info *info;
 	struct beamformer_entry *bfer = NULL;
 	struct beamformee_entry *bfee = NULL;
@@ -1495,6 +1524,7 @@ static void _beamforming_leave(PADAPTER adapter, u8 *ra)
 
 static void _beamforming_sounding_down(PADAPTER adapter, u8 status)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info	*info;
 	struct sounding_info *sounding;
 	struct beamformee_entry *bfee;
@@ -1556,6 +1586,7 @@ static void _beamforming_sounding_down(PADAPTER adapter, u8 status)
 
 static void _c2h_snd_txbf(PADAPTER adapter, u8 *buf, u8 buf_len)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info	*info;
 	u8 res;
 
@@ -1575,6 +1606,7 @@ static void _c2h_snd_txbf(PADAPTER adapter, u8 *buf, u8 buf_len)
  */
 enum beamforming_cap rtw_bf_bfee_get_entry_cap_by_macid(void *mlme, u8 macid)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	PADAPTER adapter;
 	enum beamforming_cap cap = BEAMFORMING_CAP_NONE;
 
@@ -1587,21 +1619,25 @@ enum beamforming_cap rtw_bf_bfee_get_entry_cap_by_macid(void *mlme, u8 macid)
 
 struct beamformer_entry *rtw_bf_bfer_get_entry_by_addr(PADAPTER adapter, u8 *ra)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	return _bfer_get_entry_by_addr(adapter, ra);
 }
 
 struct beamformee_entry *rtw_bf_bfee_get_entry_by_addr(PADAPTER adapter, u8 *ra)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	return _bfee_get_entry_by_addr(adapter, ra);
 }
 
 void rtw_bf_get_ndpa_packet(PADAPTER adapter, union recv_frame *precv_frame)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	RTW_DBG("+%s\n", __FUNCTION__);
 }
 
 u32 rtw_bf_get_report_packet(PADAPTER adapter, union recv_frame *precv_frame)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	u32 ret = _SUCCESS;
 	struct beamforming_info *info;
 	struct beamformee_entry *bfee = NULL;
@@ -1687,6 +1723,7 @@ u32 rtw_bf_get_report_packet(PADAPTER adapter, union recv_frame *precv_frame)
 
 u8 rtw_bf_send_vht_gid_mgnt_packet(PADAPTER adapter, u8 *ra, u8 *gid, u8 *position)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	/* General */
 	struct xmit_priv *xmitpriv;
 	struct mlme_priv *mlmepriv;
@@ -1749,6 +1786,7 @@ u8 rtw_bf_send_vht_gid_mgnt_packet(PADAPTER adapter, u8 *ra, u8 *gid, u8 *positi
  */
 void rtw_bf_get_vht_gid_mgnt_packet(PADAPTER adapter, union recv_frame *precv_frame)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	u8 *pframe;
 	u8 *ta, *gid, *position;
 
@@ -1772,6 +1810,7 @@ void rtw_bf_get_vht_gid_mgnt_packet(PADAPTER adapter, union recv_frame *precv_fr
 
 void rtw_bf_init(PADAPTER adapter)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info	*info;
 
 
@@ -1810,6 +1849,7 @@ void rtw_bf_init(PADAPTER adapter)
 
 void rtw_bf_cmd_hdl(PADAPTER adapter, u8 type, u8 *pbuf)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	switch (type) {
 	case BEAMFORMING_CTRL_ENTER:
 		_beamforming_enter(adapter, pbuf);
@@ -1845,6 +1885,7 @@ void rtw_bf_cmd_hdl(PADAPTER adapter, u8 type, u8 *pbuf)
 
 u8 rtw_bf_cmd(PADAPTER adapter, s32 type, u8 *pbuf, s32 size, u8 enqueue)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct cmd_obj *ph2c;
 	struct drvextra_cmd_parm *pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &adapter->cmdpriv;
@@ -1900,6 +1941,7 @@ exit:
 
 void rtw_bf_update_attrib(PADAPTER adapter, struct pkt_attrib *attrib, struct sta_info *sta)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	if (sta) {
 		attrib->txbf_g_id = sta->cmn.bf_info.g_id;
 		attrib->txbf_p_aid = sta->cmn.bf_info.p_aid;
@@ -1908,6 +1950,7 @@ void rtw_bf_update_attrib(PADAPTER adapter, struct pkt_attrib *attrib, struct st
 
 void rtw_bf_c2h_handler(PADAPTER adapter, u8 id, u8 *buf, u8 buf_len)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	switch (id) {
 	case CMD_ID_C2H_SND_TXBF:
 		_c2h_snd_txbf(adapter, buf, buf_len);
@@ -1918,6 +1961,7 @@ void rtw_bf_c2h_handler(PADAPTER adapter, u8 id, u8 *buf, u8 buf_len)
 #define toMbps(bytes, secs)	(rtw_division64(bytes >> 17, secs))
 void rtw_bf_update_traffic(PADAPTER adapter)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct beamforming_info	*info;
 	struct sounding_info *sounding;
 	struct beamformee_entry *bfee;
@@ -2007,6 +2051,7 @@ void rtw_bf_update_traffic(PADAPTER adapter)
 /*PHYDM_BF - (BEAMFORMING_SUPPORT == 1)*/
 u32	rtw_beamforming_get_report_frame(PADAPTER	 Adapter, union recv_frame *precv_frame)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	u32	ret = _SUCCESS;
 
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
@@ -2018,6 +2063,7 @@ u32	rtw_beamforming_get_report_frame(PADAPTER	 Adapter, union recv_frame *precv_
 
 void	rtw_beamforming_get_ndpa_frame(PADAPTER	 Adapter, union recv_frame *precv_frame)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
 	struct dm_struct		*pDM_Odm = &(pHalData->odmpriv);
 
@@ -2026,6 +2072,7 @@ void	rtw_beamforming_get_ndpa_frame(PADAPTER	 Adapter, union recv_frame *precv_f
 
 void	beamforming_wk_hdl(_adapter *padapter, u8 type, u8 *pbuf)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(padapter);
 	struct dm_struct		*pDM_Odm = &(pHalData->odmpriv);
 
@@ -2049,6 +2096,7 @@ void	beamforming_wk_hdl(_adapter *padapter, u8 type, u8 *pbuf)
 
 u8	beamforming_wk_cmd(_adapter *padapter, s32 type, u8 *pbuf, s32 size, u8 enqueue)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	struct cmd_obj	*ph2c;
 	struct drvextra_cmd_parm	*pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -2111,6 +2159,7 @@ exit:
 
 void update_attrib_txbf_info(_adapter *padapter, struct pkt_attrib *pattrib, struct sta_info *psta)
 {
+	printk(KERN_DEBUG "rtw_beamforming.c - ");
 	if (psta) {
 		pattrib->txbf_g_id = psta->cmn.bf_info.g_id;
 		pattrib->txbf_p_aid = psta->cmn.bf_info.p_aid;

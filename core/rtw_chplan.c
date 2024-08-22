@@ -387,6 +387,7 @@ static struct chplan_ent_t RTW_CHANNEL_PLAN_MAP_REALTEK_DEFINE =
 
 u8 rtw_chplan_get_default_regd(u8 id)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	u8 regd;
 
 	if (id == RTW_CHPLAN_REALTEK_DEFINE)
@@ -399,6 +400,7 @@ u8 rtw_chplan_get_default_regd(u8 id)
 
 bool rtw_chplan_is_empty(u8 id)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	struct chplan_ent_t *chplan_map;
 
 	if (id == RTW_CHPLAN_REALTEK_DEFINE)
@@ -418,6 +420,7 @@ bool rtw_chplan_is_empty(u8 id)
 
 bool rtw_regsty_is_excl_chs(struct registry_priv *regsty, u8 ch)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	int i;
 
 	for (i = 0; i < MAX_CHANNEL_NUM; i++) {
@@ -431,6 +434,7 @@ bool rtw_regsty_is_excl_chs(struct registry_priv *regsty, u8 ch)
 
 inline static u8 rtw_rd_5g_band1_passive(u8 rtw_rd_5g)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	u8 passive = 0;
 
 	switch (rtw_rd_5g) {
@@ -451,6 +455,7 @@ inline static u8 rtw_rd_5g_band1_passive(u8 rtw_rd_5g)
 
 inline static u8 rtw_rd_5g_band4_passive(u8 rtw_rd_5g)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	u8 passive = 0;
 
 	switch (rtw_rd_5g) {
@@ -469,6 +474,7 @@ inline static u8 rtw_rd_5g_band4_passive(u8 rtw_rd_5g)
 
 u8 init_channel_set(_adapter *padapter, u8 ChannelPlan, RT_CHANNEL_INFO *channel_set)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	struct registry_priv *regsty = adapter_to_regsty(padapter);
 	u8	index, chanset_size = 0;
 	u8	b5GBand = _FALSE, b2_4GBand = _FALSE;
@@ -1092,6 +1098,7 @@ static const struct country_chplan country_chplan_map[] = {
 */
 const struct country_chplan *rtw_get_chplan_from_country(const char *country_code)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 #if RTW_DEF_MODULE_REGULATORY_CERT
 	const struct country_chplan *exc_ent = NULL;
 #endif
@@ -1134,6 +1141,7 @@ const struct country_chplan *rtw_get_chplan_from_country(const char *country_cod
 
 void dump_country_chplan(void *sel, const struct country_chplan *ent)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	RTW_PRINT_SEL(sel, "\"%c%c\", 0x%02X%s\n"
 		, ent->alpha2[0], ent->alpha2[1], ent->chplan
 		, COUNTRY_CHPLAN_EN_11AC(ent) ? " ac" : ""
@@ -1142,6 +1150,7 @@ void dump_country_chplan(void *sel, const struct country_chplan *ent)
 
 void dump_country_chplan_map(void *sel)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	const struct country_chplan *ent;
 	u8 code[2];
 
@@ -1165,6 +1174,7 @@ void dump_country_chplan_map(void *sel)
 
 void dump_chplan_id_list(void *sel)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	u8 first = 1;
 	int i;
 
@@ -1184,6 +1194,7 @@ void dump_chplan_id_list(void *sel)
 
 void dump_chplan_test(void *sel)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	int i, j;
 
 	/* check invalid channel */
@@ -1206,5 +1217,6 @@ void dump_chplan_test(void *sel)
 
 void dump_chplan_ver(void *sel)
 {
+	printk(KERN_DEBUG "rtw_chplan.c - ");
 	RTW_PRINT_SEL(sel, "%s-%s\n", RTW_DOMAIN_MAP_VER, RTW_COUNTRY_MAP_VER);
 }

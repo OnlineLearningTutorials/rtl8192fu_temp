@@ -28,6 +28,7 @@ No irqsave is necessary.
 
 sint	_rtw_init_cmd_priv(struct	cmd_priv *pcmdpriv)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	sint res = _SUCCESS;
 
 
@@ -72,6 +73,7 @@ exit:
 #ifdef CONFIG_C2H_WK
 static void c2h_wk_callback(_workitem *work)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct evt_priv *evtpriv = container_of(work, struct evt_priv, c2h_wk);
 	_adapter *adapter = container_of(evtpriv, _adapter, evtpriv);
 	u8 *c2h_evt;
@@ -128,6 +130,7 @@ static void c2h_wk_callback(_workitem *work)
 
 sint _rtw_init_evt_priv(struct evt_priv *pevtpriv)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	sint res = _SUCCESS;
 
 
@@ -184,6 +187,7 @@ exit:
 
 void _rtw_free_evt_priv(struct	evt_priv *pevtpriv)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 
 
 #ifdef CONFIG_EVENT_THREAD_MODE
@@ -213,6 +217,7 @@ void _rtw_free_evt_priv(struct	evt_priv *pevtpriv)
 
 void _rtw_free_cmd_priv(struct	cmd_priv *pcmdpriv)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 
 	if (pcmdpriv) {
 		_rtw_spinlock_free(&(pcmdpriv->cmd_queue.lock));
@@ -245,6 +250,7 @@ extern u8 dump_cmd_id;
 
 sint _rtw_enqueue_cmd(_queue *queue, struct cmd_obj *obj, bool to_head)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	_irqL irqL;
 
 
@@ -306,6 +312,7 @@ exit:
 
 struct	cmd_obj	*_rtw_dequeue_cmd(_queue *queue)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	_irqL irqL;
 	struct cmd_obj *obj;
 
@@ -366,6 +373,7 @@ struct	cmd_obj	*_rtw_dequeue_cmd(_queue *queue)
 
 u32	rtw_init_cmd_priv(struct cmd_priv *pcmdpriv)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u32	res;
 	res = _rtw_init_cmd_priv(pcmdpriv);
 	return res;
@@ -373,6 +381,7 @@ u32	rtw_init_cmd_priv(struct cmd_priv *pcmdpriv)
 
 u32	rtw_init_evt_priv(struct	evt_priv *pevtpriv)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	int	res;
 	res = _rtw_init_evt_priv(pevtpriv);
 	return res;
@@ -391,6 +400,7 @@ void rtw_free_cmd_priv(struct	cmd_priv *pcmdpriv)
 int rtw_cmd_filter(struct cmd_priv *pcmdpriv, struct cmd_obj *cmd_obj);
 int rtw_cmd_filter(struct cmd_priv *pcmdpriv, struct cmd_obj *cmd_obj)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u8 bAllow = _FALSE; /* set to _TRUE to allow enqueuing cmd when hw_init_completed is _FALSE */
 
 #ifdef SUPPORT_HW_RFOFF_DETECTED
@@ -432,6 +442,7 @@ int rtw_cmd_filter(struct cmd_priv *pcmdpriv, struct cmd_obj *cmd_obj)
 
 u32 rtw_enqueue_cmd(struct cmd_priv *pcmdpriv, struct cmd_obj *cmd_obj)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	int res = _FAIL;
 	PADAPTER padapter = pcmdpriv->padapter;
 
@@ -477,6 +488,7 @@ exit:
 
 struct	cmd_obj	*rtw_dequeue_cmd(struct cmd_priv *pcmdpriv)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmd_obj;
 
 
@@ -487,12 +499,14 @@ struct	cmd_obj	*rtw_dequeue_cmd(struct cmd_priv *pcmdpriv)
 
 void rtw_cmd_clr_isr(struct	cmd_priv *pcmdpriv)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	pcmdpriv->cmd_done_cnt++;
 	/* _rtw_up_sema(&(pcmdpriv->cmd_done_sema)); */
 }
 
 void rtw_free_cmd_obj(struct cmd_obj *pcmd)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	if (pcmd->parmbuf != NULL) {
 		/* free parmbuf in cmd_obj */
 		rtw_mfree((unsigned char *)pcmd->parmbuf, pcmd->cmdsz);
@@ -511,6 +525,7 @@ void rtw_free_cmd_obj(struct cmd_obj *pcmd)
 
 void rtw_stop_cmd_thread(_adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	if (adapter->cmdThread) {
 		_rtw_up_sema(&adapter->cmdpriv.cmd_queue_sema);
 		rtw_thread_stop(adapter->cmdThread);
@@ -520,6 +535,7 @@ void rtw_stop_cmd_thread(_adapter *adapter)
 
 thread_return rtw_cmd_thread(thread_context context)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u8 ret;
 	struct cmd_obj *pcmd;
 	u8 *pcmdbuf, *prspbuf;
@@ -736,6 +752,7 @@ post_process:
 #ifdef CONFIG_EVENT_THREAD_MODE
 u32 rtw_enqueue_evt(struct evt_priv *pevtpriv, struct evt_obj *obj)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	_irqL irqL;
 	int	res;
 	_queue *queue = &pevtpriv->evt_queue;
@@ -764,6 +781,7 @@ exit:
 
 struct evt_obj *rtw_dequeue_evt(_queue *queue)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	_irqL irqL;
 	struct	evt_obj	*pevtobj;
 
@@ -785,6 +803,7 @@ struct evt_obj *rtw_dequeue_evt(_queue *queue)
 
 void rtw_free_evt_obj(struct evt_obj *pevtobj)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 
 	if (pevtobj->parmbuf)
 		rtw_mfree((unsigned char *)pevtobj->parmbuf, pevtobj->evtsz);
@@ -795,6 +814,7 @@ void rtw_free_evt_obj(struct evt_obj *pevtobj)
 
 void rtw_evt_notify_isr(struct evt_priv *pevtpriv)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	pevtpriv->evt_done_cnt++;
 	_rtw_up_sema(&(pevtpriv->evt_notify));
 }
@@ -806,6 +826,7 @@ u8 rtw_setstandby_cmd(unsigned char  *adapter)
 */
 u8 rtw_setstandby_cmd(_adapter *padapter, uint action)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct usb_suspend_parm	*psetusbsuspend;
 	struct cmd_priv			*pcmdpriv = &padapter->cmdpriv;
@@ -840,6 +861,7 @@ exit:
 
 void rtw_init_sitesurvey_parm(_adapter *padapter, struct sitesurvey_parm *pparm)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct mlme_priv *pmlmepriv = &padapter->mlmepriv;
 
 
@@ -854,6 +876,7 @@ rtw_sitesurvey_cmd(~)
 */
 u8 rtw_sitesurvey_cmd(_adapter *padapter, struct sitesurvey_parm *pparm)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u8 res = _FAIL;
 	struct cmd_obj		*ph2c;
 	struct sitesurvey_parm	*psurveyPara;
@@ -910,6 +933,7 @@ u8 rtw_sitesurvey_cmd(_adapter *padapter, struct sitesurvey_parm *pparm)
 
 u8 rtw_setdatarate_cmd(_adapter *padapter, u8 *rateset)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct setdatarate_parm	*pbsetdataratepara;
 	struct cmd_priv		*pcmdpriv = &padapter->cmdpriv;
@@ -946,6 +970,7 @@ exit:
 
 u8 rtw_setbasicrate_cmd(_adapter *padapter, u8 *rateset)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct setbasicrate_parm	*pssetbasicratepara;
 	struct cmd_priv		*pcmdpriv = &padapter->cmdpriv;
@@ -986,6 +1011,7 @@ unsigned char rtw_setphy_cmd(unsigned char  *adapter)
 */
 u8 rtw_setphy_cmd(_adapter *padapter, u8 modem, u8 ch)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct setphy_parm		*psetphypara;
 	struct cmd_priv			*pcmdpriv = &padapter->cmdpriv;
@@ -1020,6 +1046,7 @@ exit:
 
 u8 rtw_getmacreg_cmd(_adapter *padapter, u8 len, u32 addr)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *ph2c;
 	struct readMAC_parm *preadmacparm;
 	struct cmd_priv *pcmdpriv = &padapter->cmdpriv;
@@ -1051,12 +1078,14 @@ exit:
 
 void rtw_usb_catc_trigger_cmd(_adapter *padapter, const char *caller)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	RTW_INFO("%s caller:%s\n", __func__, caller);
 	rtw_getmacreg_cmd(padapter, 1, 0x1c4);
 }
 
 u8 rtw_setbbreg_cmd(_adapter *padapter, u8 offset, u8 val)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct writeBB_parm		*pwritebbparm;
 	struct cmd_priv			*pcmdpriv = &padapter->cmdpriv;
@@ -1086,6 +1115,7 @@ exit:
 
 u8 rtw_getbbreg_cmd(_adapter  *padapter, u8 offset, u8 *pval)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct readBB_parm		*prdbbparm;
 	struct cmd_priv			*pcmdpriv = &padapter->cmdpriv;
@@ -1119,6 +1149,7 @@ exit:
 
 u8 rtw_setrfreg_cmd(_adapter  *padapter, u8 offset, u32 val)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct writeRF_parm		*pwriterfparm;
 	struct cmd_priv			*pcmdpriv = &padapter->cmdpriv;
@@ -1148,6 +1179,7 @@ exit:
 
 u8 rtw_getrfreg_cmd(_adapter  *padapter, u8 offset, u8 *pval)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct readRF_parm		*prdrfparm;
 	struct cmd_priv			*pcmdpriv = &padapter->cmdpriv;
@@ -1186,6 +1218,7 @@ exit:
 
 void rtw_getbbrfreg_cmdrsp_callback(_adapter	*padapter,  struct cmd_obj *pcmd)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 
 	/* rtw_free_cmd_obj(pcmd); */
 	rtw_mfree((unsigned char *) pcmd->parmbuf, pcmd->cmdsz);
@@ -1199,6 +1232,7 @@ void rtw_getbbrfreg_cmdrsp_callback(_adapter	*padapter,  struct cmd_obj *pcmd)
 
 void rtw_readtssi_cmdrsp_callback(_adapter	*padapter,  struct cmd_obj *pcmd)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 
 	rtw_mfree((unsigned char *) pcmd->parmbuf, pcmd->cmdsz);
 	rtw_mfree((unsigned char *) pcmd, sizeof(struct cmd_obj));
@@ -1213,6 +1247,7 @@ void rtw_readtssi_cmdrsp_callback(_adapter	*padapter,  struct cmd_obj *pcmd)
 static u8 rtw_createbss_cmd(_adapter  *adapter, int flags, bool adhoc
 	, u8 ifbmp, u8 excl_ifbmp, s16 req_ch, s8 req_bw, s8 req_offset)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct createbss_parm *parm;
 	struct cmd_priv *pcmdpriv = &adapter->cmdpriv;
@@ -1283,6 +1318,7 @@ exit:
 
 inline u8 rtw_create_ibss_cmd(_adapter *adapter, int flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return rtw_createbss_cmd(adapter, flags
 		, 1
 		, 0, 0
@@ -1292,6 +1328,7 @@ inline u8 rtw_create_ibss_cmd(_adapter *adapter, int flags)
 
 inline u8 rtw_startbss_cmd(_adapter *adapter, int flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return rtw_createbss_cmd(adapter, flags
 		, 0
 		, BIT(adapter->iface_id), 0
@@ -1302,6 +1339,7 @@ inline u8 rtw_startbss_cmd(_adapter *adapter, int flags)
 inline u8 rtw_change_bss_chbw_cmd(_adapter *adapter, int flags
 	, u8 ifbmp, u8 excl_ifbmp, s16 req_ch, s8 req_bw, s8 req_offset)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return rtw_createbss_cmd(adapter, flags
 		, 0
 		, ifbmp, excl_ifbmp
@@ -1313,6 +1351,7 @@ inline u8 rtw_change_bss_chbw_cmd(_adapter *adapter, int flags
 static void rtw_ft_validate_akm_type(_adapter  *padapter,
 	struct wlan_network *pnetwork)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct security_priv *psecuritypriv = &(padapter->securitypriv);
 	struct ft_roam_info *pft_roam = &(padapter->mlmepriv.ft_roam);
 	u32 tmp_len;
@@ -1347,6 +1386,7 @@ static void rtw_ft_validate_akm_type(_adapter  *padapter,
 
 u8 rtw_joinbss_cmd(_adapter  *padapter, struct wlan_network *pnetwork)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u8	*auth, res = _SUCCESS;
 	uint	t_len = 0;
 	WLAN_BSSID_EX		*psecnetwork;
@@ -1541,6 +1581,7 @@ exit:
 
 u8 rtw_disassoc_cmd(_adapter *padapter, u32 deauth_timeout_ms, int flags) /* for sta_mode */
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj = NULL;
 	struct disconnect_parm *param = NULL;
 	struct cmd_priv *cmdpriv = &padapter->cmdpriv;
@@ -1593,6 +1634,7 @@ exit:
 
 u8 rtw_stop_ap_cmd(_adapter  *adapter, u8 flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 #ifdef CONFIG_AP_MODE
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *parm;
@@ -1648,6 +1690,7 @@ exit:
 
 u8 rtw_setopmode_cmd(_adapter  *adapter, NDIS_802_11_NETWORK_INFRASTRUCTURE networktype, u8 flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct setopmode_parm *parm;
 	struct cmd_priv *pcmdpriv = &adapter->cmdpriv;
@@ -1700,6 +1743,7 @@ exit:
 
 u8 rtw_setstakey_cmd(_adapter *padapter, struct sta_info *sta, u8 key_type, bool enqueue)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct set_stakey_parm	*psetstakey_para;
 	struct cmd_priv			*pcmdpriv = &padapter->cmdpriv;
@@ -1770,6 +1814,7 @@ exit:
 
 u8 rtw_clearstakey_cmd(_adapter *padapter, struct sta_info *sta, u8 enqueue)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct set_stakey_parm	*psetstakey_para;
 	struct cmd_priv			*pcmdpriv = &padapter->cmdpriv;
@@ -1830,6 +1875,7 @@ exit:
 
 u8 rtw_setrttbl_cmd(_adapter  *padapter, struct setratable_parm *prate_table)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct setratable_parm	*psetrttblparm;
 	struct cmd_priv			*pcmdpriv = &padapter->cmdpriv;
@@ -1860,6 +1906,7 @@ exit:
 
 u8 rtw_getrttbl_cmd(_adapter  *padapter, struct getratable_rsp *pval)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj			*ph2c;
 	struct getratable_parm	*pgetrttblparm;
 	struct cmd_priv			*pcmdpriv = &padapter->cmdpriv;
@@ -1897,6 +1944,7 @@ exit:
 
 u8 rtw_setassocsta_cmd(_adapter  *padapter, u8 *mac_addr)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_priv		*pcmdpriv = &padapter->cmdpriv;
 	struct cmd_obj			*ph2c;
 	struct set_assocsta_parm	*psetassocsta_para;
@@ -1941,6 +1989,7 @@ exit:
 
 u8 rtw_addbareq_cmd(_adapter *padapter, u8 tid, u8 *addr)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_priv		*pcmdpriv = &padapter->cmdpriv;
 	struct cmd_obj		*ph2c;
 	struct addBaReq_parm	*paddbareq_parm;
@@ -1979,6 +2028,7 @@ exit:
 
 u8 rtw_addbarsp_cmd(_adapter *padapter, u8 *addr, u16 tid, u8 status, u8 size, u16 start_seq)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_priv *pcmdpriv = &padapter->cmdpriv;
 	struct cmd_obj *ph2c;
 	struct addBaRsp_parm *paddBaRsp_parm;
@@ -2017,6 +2067,7 @@ exit:
 /* add for CONFIG_IEEE80211W, none 11w can use it */
 u8 rtw_reset_securitypriv_cmd(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj		*ph2c;
 	struct drvextra_cmd_parm  *pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -2056,11 +2107,13 @@ exit:
 
 void free_assoc_resources_hdl(_adapter *padapter, u8 lock_scanned_queue)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	rtw_free_assoc_resources(padapter, lock_scanned_queue);
 }
 
 u8 rtw_free_assoc_resources_cmd(_adapter *padapter, u8 lock_scanned_queue, int flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmd;
 	struct drvextra_cmd_parm  *pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -2112,6 +2165,7 @@ exit:
 
 u8 rtw_dynamic_chk_wk_cmd(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj		*ph2c;
 	struct drvextra_cmd_parm  *pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -2152,6 +2206,7 @@ exit:
 
 u8 rtw_set_chbw_cmd(_adapter *padapter, u8 ch, u8 bw, u8 ch_offset, u8 flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *pcmdobj;
 	struct set_ch_parm *set_ch_parm;
 	struct cmd_priv *pcmdpriv = &padapter->cmdpriv;
@@ -2219,6 +2274,7 @@ exit:
 
 u8 _rtw_set_chplan_cmd(_adapter *adapter, int flags, u8 chplan, const struct country_chplan *country_ent, u8 swconfig)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct	SetChannelPlan_param *parm;
 	struct cmd_priv *pcmdpriv = &adapter->cmdpriv;
@@ -2308,11 +2364,13 @@ exit:
 
 inline u8 rtw_set_chplan_cmd(_adapter *adapter, int flags, u8 chplan, u8 swconfig)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return _rtw_set_chplan_cmd(adapter, flags, chplan, NULL, swconfig);
 }
 
 inline u8 rtw_set_country_cmd(_adapter *adapter, int flags, const char *country_code, u8 swconfig)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	const struct country_chplan *ent;
 
 	if (is_alpha(country_code[0]) == _FALSE
@@ -2336,6 +2394,7 @@ inline u8 rtw_set_country_cmd(_adapter *adapter, int flags, const char *country_
 
 u8 rtw_led_blink_cmd(_adapter *padapter, void *pLed)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct	cmd_obj	*pcmdobj;
 	struct	LedBlink_param *ledBlink_param;
 	struct	cmd_priv   *pcmdpriv = &padapter->cmdpriv;
@@ -2370,6 +2429,7 @@ exit:
 
 u8 rtw_set_csa_cmd(_adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct cmd_priv *cmdpriv = &adapter->cmdpriv;
 	u8	res = _SUCCESS;
@@ -2389,6 +2449,7 @@ exit:
 
 u8 rtw_tdls_cmd(_adapter *padapter, u8 *addr, u8 option)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u8 res = _SUCCESS;
 #ifdef CONFIG_TDLS
 	struct	cmd_obj	*pcmdobj;
@@ -2425,6 +2486,7 @@ exit:
 
 u8 rtw_enable_hw_update_tsf_cmd(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *ph2c;
 	struct drvextra_cmd_parm	*pdrvextra_cmd_parm;
 	struct cmd_priv *pcmdpriv = &padapter->cmdpriv;
@@ -2459,6 +2521,7 @@ exit:
 
 u8 rtw_periodic_tsf_update_end_cmd(_adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *parm;
 	struct cmd_priv *cmdpriv = &adapter->cmdpriv;
@@ -2491,6 +2554,7 @@ exit:
 }
 u8 rtw_ssmps_wk_hdl(_adapter *adapter, struct ssmps_cmd_parm *ssmp_param)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u8 res = _SUCCESS;
 	struct sta_info *sta = ssmp_param->sta;
 	u8 smps = ssmp_param->smps;
@@ -2507,6 +2571,7 @@ u8 rtw_ssmps_wk_hdl(_adapter *adapter, struct ssmps_cmd_parm *ssmp_param)
 
 u8 rtw_ssmps_wk_cmd(_adapter *adapter, struct sta_info *sta, u8 smps, u8 enqueue)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *cmd_parm;
 	struct ssmps_cmd_parm *ssmp_param;
@@ -2561,6 +2626,7 @@ exit:
 #ifdef CONFIG_SUPPORT_STATIC_SMPS
 u8 _ssmps_chk_by_tp(_adapter *adapter, u8 from_timer)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u8 enter_smps = _FALSE;
 	struct mlme_priv *pmlmepriv = &adapter->mlmepriv;
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
@@ -2642,6 +2708,7 @@ u8 _ssmps_chk_by_tp(_adapter *adapter, u8 from_timer)
 #ifdef CONFIG_CTRL_TXSS_BY_TP
 void rtw_ctrl_txss_update_mimo_type(_adapter *adapter, struct sta_info *sta)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
 
 	pmlmeext->txss_momi_type_bk = sta->cmn.mimo_type;
@@ -2649,6 +2716,7 @@ void rtw_ctrl_txss_update_mimo_type(_adapter *adapter, struct sta_info *sta)
 
 u8 rtw_ctrl_txss(_adapter *adapter, struct sta_info *sta, bool tx_1ss)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(adapter);
 	u8 lps_changed = _FALSE;
@@ -2682,6 +2750,7 @@ u8 rtw_ctrl_txss(_adapter *adapter, struct sta_info *sta, bool tx_1ss)
 
 u8 rtw_ctrl_txss_wk_hdl(_adapter *adapter, struct txss_cmd_parm *txss_param)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	if (!txss_param->sta)
 		return _FALSE;
 
@@ -2690,6 +2759,7 @@ u8 rtw_ctrl_txss_wk_hdl(_adapter *adapter, struct txss_cmd_parm *txss_param)
 
 u8 rtw_ctrl_txss_wk_cmd(_adapter *adapter, struct sta_info *sta, bool tx_1ss, u8 flag)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *cmd_parm;
 	struct txss_cmd_parm *txss_param;
@@ -2753,6 +2823,7 @@ exit:
 
 void rtw_ctrl_tx_ss_by_tp(_adapter *adapter, u8 from_timer)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	bool tx_1ss  = _FALSE; /*change tx from 2ss to 1ss*/
 	struct mlme_priv *pmlmepriv = &adapter->mlmepriv;
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
@@ -2801,6 +2872,7 @@ void rtw_ctrl_tx_ss_by_tp(_adapter *adapter, u8 from_timer)
 #ifdef DBG_CTRL_TXSS
 void dbg_ctrl_txss(_adapter *adapter, bool tx_1ss)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct mlme_priv *pmlmepriv = &adapter->mlmepriv;
 	struct mlme_ext_priv *pmlmeext = &(adapter->mlmeextpriv);
 	struct sta_priv *pstapriv = &adapter->stapriv;
@@ -2828,6 +2900,7 @@ void dbg_ctrl_txss(_adapter *adapter, bool tx_1ss)
 #ifdef LPS_BCN_CNT_MONITOR
 static u8 _bcn_cnt_expected(struct sta_info *psta)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	_adapter *adapter = psta->padapter;
 	struct mlme_ext_priv *pmlmeext = &adapter->mlmeextpriv;
 	struct mlme_ext_info *pmlmeinfo = &(pmlmeext->mlmext_info);
@@ -2849,6 +2922,7 @@ static u8 _bcn_cnt_expected(struct sta_info *psta)
 #endif
 u8 _lps_chk_by_tp(_adapter *adapter, u8 from_timer)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u8 enter_ps = _FALSE;
 	struct mlme_priv *pmlmepriv = &adapter->mlmepriv;
 	struct sta_priv *pstapriv = &adapter->stapriv;
@@ -2944,6 +3018,7 @@ u8 _lps_chk_by_tp(_adapter *adapter, u8 from_timer)
 
 static u8 _lps_chk_by_pkt_cnts(_adapter *padapter, u8 from_timer, u8 bBusyTraffic)
 {		
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
 	u8	bEnterPS = _FALSE;
 
@@ -3047,6 +3122,7 @@ static u8 _lps_chk_by_pkt_cnts(_adapter *padapter, u8 from_timer, u8 bBusyTraffi
 /* from_timer == 1 means driver is in LPS */
 u8 traffic_status_watchdog(_adapter *padapter, u8 from_timer)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u8	bEnterPS = _FALSE;
 	u16 BusyThresholdHigh;
 	u16	BusyThresholdLow;
@@ -3189,6 +3265,7 @@ u8 traffic_status_watchdog(_adapter *padapter, u8 from_timer)
 /* for 11n Logo 4.2.31/4.2.32 */
 static void dynamic_update_bcn_check(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
 	struct mlme_ext_priv *pmlmeext = &padapter->mlmeextpriv;
 
@@ -3240,6 +3317,7 @@ static void dynamic_update_bcn_check(_adapter *padapter)
 }
 void rtw_iface_dynamic_chk_wk_hdl(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	#ifdef CONFIG_ACTIVE_KEEP_ALIVE_CHECK
 	#ifdef CONFIG_AP_MODE
 	if (MLME_IS_AP(padapter) || MLME_IS_MESH(padapter)) {
@@ -3267,6 +3345,7 @@ void rtw_iface_dynamic_chk_wk_hdl(_adapter *padapter)
 }
 void rtw_dynamic_chk_wk_hdl(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	rtw_mi_dynamic_chk_wk_hdl(padapter);
 
 #ifdef DBG_CONFIG_ERROR_DETECT
@@ -3312,6 +3391,7 @@ struct lps_ctrl_wk_parm {
 
 void lps_ctrl_wk_hdl(_adapter *padapter, u8 lps_ctrl_type, u8 *buf)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(padapter);
 	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
 	struct lps_ctrl_wk_parm *parm = (struct lps_ctrl_wk_parm *)buf;
@@ -3400,6 +3480,7 @@ void lps_ctrl_wk_hdl(_adapter *padapter, u8 lps_ctrl_type, u8 *buf)
 
 static u8 _rtw_lps_ctrl_wk_cmd(_adapter *adapter, u8 lps_ctrl_type, s8 lps_level, s8 lps_1t1r, u8 flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *parm;
 	struct lps_ctrl_wk_parm *wk_parm = NULL;
@@ -3474,11 +3555,13 @@ exit:
 
 u8 rtw_lps_ctrl_wk_cmd(_adapter *adapter, u8 lps_ctrl_type, u8 flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return _rtw_lps_ctrl_wk_cmd(adapter, lps_ctrl_type, -1, -1, flags);
 }
 
 u8 rtw_lps_ctrl_leave_set_level_cmd(_adapter *adapter, u8 lps_level, u8 flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return _rtw_lps_ctrl_wk_cmd(adapter, LPS_CTRL_LEAVE_SET_OPTION, lps_level, -1, flags);
 }
 
@@ -3496,6 +3579,7 @@ void rtw_dm_in_lps_hdl(_adapter *padapter)
 
 u8 rtw_dm_in_lps_wk_cmd(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj	*ph2c;
 	struct drvextra_cmd_parm	*pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -3532,6 +3616,7 @@ exit:
 
 void rtw_lps_change_dtim_hdl(_adapter *padapter, u8 dtim)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(padapter);
 
 	if (dtim <= 0 || dtim > 16)
@@ -3571,6 +3656,7 @@ void rtw_lps_change_dtim_hdl(_adapter *padapter, u8 dtim)
 
 u8 rtw_lps_change_dtim_cmd(_adapter *padapter, u8 dtim)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj	*ph2c;
 	struct drvextra_cmd_parm	*pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -3614,11 +3700,13 @@ exit:
 #if (RATE_ADAPTIVE_SUPPORT == 1)
 void rpt_timer_setting_wk_hdl(_adapter *padapter, u16 minRptTime)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	rtw_hal_set_hwreg(padapter, HW_VAR_RPT_TIMER_SETTING, (u8 *)(&minRptTime));
 }
 
 u8 rtw_rpt_timer_cfg_cmd(_adapter *padapter, u16 minRptTime)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj		*ph2c;
 	struct drvextra_cmd_parm	*pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -3656,11 +3744,13 @@ exit:
 #ifdef CONFIG_ANTENNA_DIVERSITY
 void antenna_select_wk_hdl(_adapter *padapter, u8 antenna)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	rtw_hal_set_odm_var(padapter, HAL_ODM_ANTDIV_SELECT, &antenna, _TRUE);
 }
 
 u8 rtw_antenna_select_cmd(_adapter *padapter, u8 antenna, u8 enqueue)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj		*ph2c;
 	struct drvextra_cmd_parm	*pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -3711,12 +3801,14 @@ exit:
 
 void rtw_dm_ra_mask_hdl(_adapter *padapter, struct sta_info *psta)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	if (psta)
 		set_sta_rate(padapter, psta);
 }
 
 u8 rtw_dm_ra_mask_wk_cmd(_adapter *padapter, u8 *psta)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj	*ph2c;
 	struct drvextra_cmd_parm	*pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -3753,18 +3845,21 @@ exit:
 
 void power_saving_wk_hdl(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	rtw_ps_processor(padapter);
 }
 
 /* add for CONFIG_IEEE80211W, none 11w can use it */
 void reset_securitypriv_hdl(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	rtw_reset_securitypriv(padapter);
 }
 
 #ifdef CONFIG_P2P
 u8 p2p_protocol_wk_cmd(_adapter *padapter, int intCmdType)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj	*ph2c;
 	struct drvextra_cmd_parm	*pdrvextra_cmd_parm;
 	struct wifidirect_info	*pwdinfo = &(padapter->wdinfo);
@@ -3812,6 +3907,7 @@ static u8 _p2p_roch_cmd(_adapter *adapter
 	, u8 flags
 )
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *parm;
 	struct p2p_roch_parm *roch_parm;
@@ -3892,11 +3988,13 @@ inline u8 p2p_roch_cmd(_adapter *adapter
 	, u8 flags
 )
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return _p2p_roch_cmd(adapter, cookie, wdev, ch, ch_type, duration, flags);
 }
 
 inline u8 p2p_cancel_roch_cmd(_adapter *adapter, u64 cookie, struct wireless_dev *wdev, u8 flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return _p2p_roch_cmd(adapter, cookie, wdev, NULL, 0, 0, flags);
 }
 
@@ -3906,6 +4004,7 @@ inline u8 p2p_cancel_roch_cmd(_adapter *adapter, u64 cookie, struct wireless_dev
 #ifdef CONFIG_IOCTL_CFG80211 
 inline u8 rtw_mgnt_tx_cmd(_adapter *adapter, u8 tx_ch, u8 no_cck, const u8 *buf, size_t len, int wait_ack, u8 flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *parm;
 	struct mgnt_tx_parm *mgnt_parm;
@@ -3979,6 +4078,7 @@ exit:
 
 u8 rtw_ps_cmd(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj		*ppscmd;
 	struct drvextra_cmd_parm	*pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -4021,6 +4121,7 @@ exit:
 #ifdef CONFIG_DFS
 void rtw_dfs_ch_switch_hdl(struct dvobj_priv *dvobj)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct rf_ctl_t *rfctl = dvobj_to_rfctl(dvobj);
 	_adapter *pri_adapter = dvobj_get_primary_adapter(dvobj);
 	u8 ifbmp_m = rtw_mi_get_ap_mesh_ifbmp(pri_adapter);
@@ -4112,6 +4213,7 @@ void rtw_dfs_ch_switch_hdl(struct dvobj_priv *dvobj)
 
 static void rtw_chk_hi_queue_hdl(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct sta_info *psta_bmc;
 	struct sta_priv *pstapriv = &padapter->stapriv;
 	systime start = rtw_get_current_time();
@@ -4149,6 +4251,7 @@ static void rtw_chk_hi_queue_hdl(_adapter *padapter)
 
 u8 rtw_chk_hi_queue_cmd(_adapter *padapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj	*ph2c;
 	struct drvextra_cmd_parm	*pdrvextra_cmd_parm;
 	struct cmd_priv	*pcmdpriv = &padapter->cmdpriv;
@@ -4185,6 +4288,7 @@ exit:
 #ifdef CONFIG_DFS_MASTER
 u8 rtw_dfs_rd_hdl(_adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct dvobj_priv *dvobj = adapter_to_dvobj(adapter);
 	struct rf_ctl_t *rfctl = adapter_to_rfctl(adapter);
 
@@ -4274,6 +4378,7 @@ exit:
 
 u8 rtw_dfs_rd_cmd(_adapter *adapter, bool enqueue)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *parm;
 	struct cmd_priv *cmdpriv = &adapter->cmdpriv;
@@ -4308,6 +4413,7 @@ exit:
 
 void rtw_dfs_rd_timer_hdl(void *ctx)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct rf_ctl_t *rfctl = (struct rf_ctl_t *)ctx;
 	struct dvobj_priv *dvobj = rfctl_to_dvobj(rfctl);
 
@@ -4316,6 +4422,7 @@ void rtw_dfs_rd_timer_hdl(void *ctx)
 
 static void rtw_dfs_rd_enable(struct rf_ctl_t *rfctl, u8 ch, u8 bw, u8 offset, bool bypass_cac)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct dvobj_priv *dvobj = rfctl_to_dvobj(rfctl);
 	_adapter *adapter = dvobj_get_primary_adapter(dvobj);
 
@@ -4358,6 +4465,7 @@ static void rtw_dfs_rd_enable(struct rf_ctl_t *rfctl, u8 ch, u8 bw, u8 offset, b
 
 static void rtw_dfs_rd_disable(struct rf_ctl_t *rfctl, u8 ch, u8 bw, u8 offset, bool by_others)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	_adapter *adapter = dvobj_get_primary_adapter(rfctl_to_dvobj(rfctl));
 
 	rfctl->radar_detect_by_others = by_others;
@@ -4397,6 +4505,7 @@ static void rtw_dfs_rd_disable(struct rf_ctl_t *rfctl, u8 ch, u8 bw, u8 offset, 
 
 void rtw_dfs_rd_en_decision(_adapter *adapter, u8 mlme_act, u8 excl_ifbmp)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct dvobj_priv *dvobj = adapter_to_dvobj(adapter);
 	struct rf_ctl_t *rfctl = adapter_to_rfctl(adapter);
 	struct mlme_ext_priv *mlmeext = &adapter->mlmeextpriv;
@@ -4509,6 +4618,7 @@ apply:
 
 u8 rtw_dfs_rd_en_decision_cmd(_adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *parm;
 	struct cmd_priv *cmdpriv = &adapter->cmdpriv;
@@ -4576,6 +4686,7 @@ struct btinfo {
 
 void btinfo_evt_dump(void *sel, void *buf)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct btinfo *info = (struct btinfo *)buf;
 
 	RTW_PRINT_SEL(sel, "cid:0x%02x, len:%u\n", info->cid, info->len);
@@ -4607,6 +4718,7 @@ void btinfo_evt_dump(void *sel, void *buf)
 
 static void rtw_btinfo_hdl(_adapter *adapter, u8 *buf, u16 buf_len)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 #define BTINFO_WIFI_FETCH 0x23
 #define BTINFO_BT_AUTO_RPT 0x27
 #ifdef CONFIG_BT_COEXIST_SOCKET_TRX
@@ -4649,6 +4761,7 @@ static void rtw_btinfo_hdl(_adapter *adapter, u8 *buf, u16 buf_len)
 
 u8 rtw_btinfo_cmd(_adapter *adapter, u8 *buf, u16 len)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *ph2c;
 	struct drvextra_cmd_parm *pdrvextra_cmd_parm;
 	u8 *btinfo;
@@ -4693,6 +4806,7 @@ exit:
 
 static void rtw_btc_reduce_wl_txpwr_hdl(_adapter *adapter, u32 pwr_lvl)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	rtw_btcoex_set_reduced_wl_pwr_lvl(adapter, pwr_lvl);
 	rtw_btcoex_do_reduce_wl_pwr_lvl(adapter);
 
@@ -4702,6 +4816,7 @@ static void rtw_btc_reduce_wl_txpwr_hdl(_adapter *adapter, u32 pwr_lvl)
 
 u8 rtw_btc_reduce_wl_txpwr_cmd(_adapter *adapter, u32 val)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *pcmdobj;
 	struct drvextra_cmd_parm *pdrvextra_cmd_parm;
 	struct cmd_priv *pcmdpriv = &adapter->cmdpriv;
@@ -4736,6 +4851,7 @@ exit:
 
 u8 rtw_test_h2c_cmd(_adapter *adapter, u8 *buf, u8 len)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *pcmdobj;
 	struct drvextra_cmd_parm *pdrvextra_cmd_parm;
 	u8 *ph2c_content;
@@ -4781,6 +4897,7 @@ exit:
 #ifdef CONFIG_MP_INCLUDED
 static s32 rtw_mp_cmd_hdl(_adapter *padapter, u8 mp_cmd_id)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 	int ret = H2C_SUCCESS;
 	uint status = _SUCCESS;
@@ -4904,6 +5021,7 @@ exit:
 
 u8 rtw_mp_cmd(_adapter *adapter, u8 mp_cmd_id, u8 flags)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *parm;
 	struct cmd_priv *pcmdpriv = &adapter->cmdpriv;
@@ -4963,6 +5081,7 @@ exit:
 #ifdef CONFIG_RTW_CUSTOMER_STR
 static s32 rtw_customer_str_cmd_hdl(_adapter *adapter, u8 write, const u8 *cstr)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	int ret = H2C_SUCCESS;
 
 	if (write)
@@ -4975,6 +5094,7 @@ static s32 rtw_customer_str_cmd_hdl(_adapter *adapter, u8 write, const u8 *cstr)
 
 static u8 rtw_customer_str_cmd(_adapter *adapter, u8 write, const u8 *cstr)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *parm;
 	u8 *str = NULL;
@@ -5038,17 +5158,20 @@ exit:
 
 inline u8 rtw_customer_str_req_cmd(_adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return rtw_customer_str_cmd(adapter, 0, NULL);
 }
 
 inline u8 rtw_customer_str_write_cmd(_adapter *adapter, const u8 *cstr)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return rtw_customer_str_cmd(adapter, 1, cstr);
 }
 #endif /* CONFIG_RTW_CUSTOMER_STR */
 
 u8 rtw_c2h_wk_cmd(PADAPTER padapter, u8 *pbuf, u16 length, u8 type)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *ph2c;
 	struct drvextra_cmd_parm *pdrvextra_cmd_parm;
 	struct cmd_priv *pcmdpriv = &padapter->cmdpriv;
@@ -5093,6 +5216,7 @@ exit:
 #ifdef CONFIG_FW_C2H_REG
 inline u8 rtw_c2h_reg_wk_cmd(_adapter *adapter, u8 *c2h_evt)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return rtw_c2h_wk_cmd(adapter, c2h_evt, c2h_evt ? C2H_REG_LEN : 0, C2H_TYPE_REG);
 }
 #endif
@@ -5100,12 +5224,14 @@ inline u8 rtw_c2h_reg_wk_cmd(_adapter *adapter, u8 *c2h_evt)
 #ifdef CONFIG_FW_C2H_PKT
 inline u8 rtw_c2h_packet_wk_cmd(_adapter *adapter, u8 *c2h_evt, u16 length)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	return rtw_c2h_wk_cmd(adapter, c2h_evt, length, C2H_TYPE_PKT);
 }
 #endif
 
 u8 rtw_run_in_thread_cmd(PADAPTER padapter, void (*func)(void *), void *context)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_priv *pcmdpriv;
 	struct cmd_obj *ph2c;
 	struct RunInThread_param *parm;
@@ -5141,6 +5267,7 @@ exit:
 #ifdef CONFIG_FW_C2H_REG
 s32 c2h_evt_hdl(_adapter *adapter, u8 *c2h_evt, c2h_id_filter filter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	s32 ret = _FAIL;
 	u8 buf[C2H_REG_LEN] = {0};
 	u8 id, seq, plen;
@@ -5167,6 +5294,7 @@ exit:
 
 u8 session_tracker_cmd(_adapter *adapter, u8 cmd, struct sta_info *sta, u8 *local_naddr, u8 *local_port, u8 *remote_naddr, u8 *remote_port)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_priv	*cmdpriv = &adapter->cmdpriv;
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *cmd_parm;
@@ -5233,6 +5361,7 @@ inline u8 session_tracker_del_cmd(_adapter *adapter, struct sta_info *sta, u8 *l
 
 void session_tracker_chk_for_sta(_adapter *adapter, struct sta_info *sta)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct st_ctl_t *st_ctl = &sta->st_ctl;
 	int i;
 	_irqL irqL;
@@ -5315,6 +5444,7 @@ exit:
 
 void session_tracker_chk_for_adapter(_adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct sta_priv *stapriv = &adapter->stapriv;
 	struct sta_info *sta;
 	int i;
@@ -5347,6 +5477,7 @@ void session_tracker_chk_for_adapter(_adapter *adapter)
 
 void session_tracker_cmd_hdl(_adapter *adapter, struct st_cmd_parm *parm)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	u8 cmd = parm->cmd;
 	struct sta_info *sta = parm->sta;
 
@@ -5446,6 +5577,7 @@ exit:
 #if defined(CONFIG_RTW_MESH) && defined(RTW_PER_CMD_SUPPORT_FW)
 static s32 rtw_req_per_cmd_hdl(_adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct dvobj_priv *dvobj = adapter_to_dvobj(adapter);
 	struct macid_ctl_t *macid_ctl = dvobj_to_macidctl(dvobj);
 	struct macid_bmp req_macid_bmp, *macid_bmp;
@@ -5473,6 +5605,7 @@ static s32 rtw_req_per_cmd_hdl(_adapter *adapter)
 
 u8 rtw_req_per_cmd(_adapter *adapter)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *parm;
 	struct cmd_priv *pcmdpriv = &adapter->cmdpriv;
@@ -5509,6 +5642,7 @@ exit:
 
 void rtw_ac_parm_cmd_hdl(_adapter *padapter, u8 *_ac_parm_buf, int ac_type)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 
 	u32 ac_parm_buf;
 
@@ -5543,6 +5677,7 @@ void rtw_ac_parm_cmd_hdl(_adapter *padapter, u8 *_ac_parm_buf, int ac_type)
 
 u8 rtw_drvextra_cmd_hdl(_adapter *padapter, unsigned char *pbuf)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	int ret = H2C_SUCCESS;
 	struct drvextra_cmd_parm *pdrvextra_cmd;
 
@@ -5725,6 +5860,7 @@ u8 rtw_drvextra_cmd_hdl(_adapter *padapter, unsigned char *pbuf)
 
 void rtw_survey_cmd_callback(_adapter	*padapter ,  struct cmd_obj *pcmd)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct	mlme_priv *pmlmepriv = &padapter->mlmepriv;
 
 
@@ -5742,6 +5878,7 @@ void rtw_survey_cmd_callback(_adapter	*padapter ,  struct cmd_obj *pcmd)
 }
 void rtw_disassoc_cmd_callback(_adapter	*padapter,  struct cmd_obj *pcmd)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	_irqL	irqL;
 	struct	mlme_priv *pmlmepriv = &padapter->mlmepriv;
 
@@ -5767,6 +5904,7 @@ exit:
 
 void rtw_getmacreg_cmdrsp_callback(_adapter *padapter,  struct cmd_obj *pcmd)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 
 
 	rtw_free_cmd_obj(pcmd);
@@ -5775,6 +5913,7 @@ void rtw_getmacreg_cmdrsp_callback(_adapter *padapter,  struct cmd_obj *pcmd)
 
 void rtw_joinbss_cmd_callback(_adapter	*padapter,  struct cmd_obj *pcmd)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct	mlme_priv *pmlmepriv = &padapter->mlmepriv;
 
 
@@ -5791,6 +5930,7 @@ void rtw_joinbss_cmd_callback(_adapter	*padapter,  struct cmd_obj *pcmd)
 
 void rtw_create_ibss_post_hdl(_adapter *padapter, int status)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	_irqL irqL;
 	struct wlan_network *pwlan = NULL;
 	struct	mlme_priv *pmlmepriv = &padapter->mlmepriv;
@@ -5845,6 +5985,7 @@ createbss_cmd_fail:
 
 void rtw_setstaKey_cmdrsp_callback(_adapter	*padapter ,  struct cmd_obj *pcmd)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 
 	struct sta_priv *pstapriv = &padapter->stapriv;
 	struct set_stakey_rsp *psetstakey_rsp = (struct set_stakey_rsp *)(pcmd->rsp);
@@ -5865,6 +6006,7 @@ exit:
 }
 void rtw_setassocsta_cmdrsp_callback(_adapter	*padapter,  struct cmd_obj *pcmd)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	_irqL	irqL;
 	struct sta_priv *pstapriv = &padapter->stapriv;
 	struct mlme_priv	*pmlmepriv = &padapter->mlmepriv;
@@ -5895,6 +6037,7 @@ exit:
 void rtw_getrttbl_cmd_cmdrsp_callback(_adapter	*padapter,  struct cmd_obj *pcmd);
 void rtw_getrttbl_cmd_cmdrsp_callback(_adapter	*padapter,  struct cmd_obj *pcmd)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 
 	rtw_free_cmd_obj(pcmd);
 #ifdef CONFIG_MP_INCLUDED
@@ -5907,6 +6050,7 @@ void rtw_getrttbl_cmd_cmdrsp_callback(_adapter	*padapter,  struct cmd_obj *pcmd)
 
 u8 set_txq_params_cmd(_adapter *adapter, u32 ac_parm, u8 ac_type)
 {
+	printk(KERN_DEBUG "rtw_cmd.c - ");
 	struct cmd_obj *cmdobj;
 	struct drvextra_cmd_parm *pdrvextra_cmd_parm;
 	struct cmd_priv *pcmdpriv = &adapter->cmdpriv;
